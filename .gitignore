@@ -1,0 +1,31 @@
+# Local configuration and outputs
+config.local.yaml
+*.local.yaml
+outputs/
+external/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Large or binary data never belong in the repository
+*.raw
+*.d/
+*.mzML
+*.parquet
+*.speclib
+*.fasta
+*.npz
+*.xlsx
+*.png
+*.pdf
+*.svg
+*.tiff
+*.log
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key

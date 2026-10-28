@@ -1,0 +1,309 @@
+id	where	printed	decimals
+T1|First-pass observations|on	Table 1	292,194	exact
+T1|First-pass observations|off	Table 1	264,295	exact
+T1|First-pass observations|standard	Table 1	290,999	exact
+T1|Final observations|on	Table 1	351,868	exact
+T1|Final observations|off	Table 1	336,692	exact
+T1|Final observations|standard	Table 1	384,573	exact
+T1|Retained observations|on	Table 1	250,683	exact
+T1|Retained observations|off	Table 1	235,480	exact
+T1|Retained observations|standard	Table 1	258,188	exact
+T1|Added observations (final only)|on	Table 1	101,185	exact
+T1|Added observations (final only)|off	Table 1	101,212	exact
+T1|Added observations (final only)|standard	Table 1	126,385	exact
+T1|Lost observations (first pass only)|on	Table 1	41,511	exact
+T1|Lost observations (first pass only)|off	Table 1	28,815	exact
+T1|Lost observations (first pass only)|standard	Table 1	32,811	exact
+T1|Lost, in empirical library|on	Table 1	31,421	exact
+T1|Lost, in empirical library|off	Table 1	23,828	exact
+T1|Lost, in empirical library|standard	Table 1	27,703	exact
+T1|Lost, outside empirical library|on	Table 1	10,090	exact
+T1|Lost, outside empirical library|off	Table 1	4,987	exact
+T1|Lost, outside empirical library|standard	Table 1	5,108	exact
+T1|Represented precursors, first pass|on	Table 1	14,998	exact
+T1|Represented precursors, first pass|off	Table 1	13,885	exact
+T1|Represented precursors, first pass|standard	Table 1	16,268	exact
+T1|Represented precursors, final|on	Table 1	11,913	exact
+T1|Represented precursors, final|off	Table 1	11,671	exact
+T1|Represented precursors, final|standard	Table 1	13,877	exact
+T1|First-pass common-row completeness, %|on	Table 1	34.92	2
+T1|First-pass common-row completeness, %|off	Table 1	33.32	2
+T1|First-pass common-row completeness, %|standard	Table 1	31.05	2
+T1|Final common-row completeness, %|on	Table 1	46.15	2
+T1|Final common-row completeness, %|off	Table 1	45.08	2
+T1|Final common-row completeness, %|standard	Table 1	43.30	2
+T2|Retained|on|yeast	Table 2	164	exact
+T2|Retained|on|n	Table 2	246201	exact
+T2|Retained|on|observed_percent	Table 2	0.067	3
+T2|Retained|on|interval_low_percent	Table 2	0.019	3
+T2|Retained|on|interval_high_percent	Table 2	0.132	3
+T2|Retained|on|ratio_to_retained	Table 2	1.000	3
+T2|Retained|on|upper_bound_percent	Table 2	0.310	3
+T2|Retained|off|yeast	Table 2	192	exact
+T2|Retained|off|n	Table 2	231204	exact
+T2|Retained|off|observed_percent	Table 2	0.083	3
+T2|Retained|off|interval_low_percent	Table 2	0.028	3
+T2|Retained|off|interval_high_percent	Table 2	0.158	3
+T2|Retained|off|ratio_to_retained	Table 2	1.000	3
+T2|Retained|off|upper_bound_percent	Table 2	0.386	3
+T2|Retained|standard|yeast	Table 2	264	exact
+T2|Retained|standard|n	Table 2	253586	exact
+T2|Retained|standard|observed_percent	Table 2	0.104	3
+T2|Retained|standard|interval_low_percent	Table 2	0.044	3
+T2|Retained|standard|interval_high_percent	Table 2	0.182	3
+T2|Retained|standard|ratio_to_retained	Table 2	1.000	3
+T2|Retained|standard|upper_bound_percent	Table 2	0.487	3
+T2|Added|on|yeast	Table 2	218	exact
+T2|Added|on|n	Table 2	100239	exact
+T2|Added|on|observed_percent	Table 2	0.217	3
+T2|Added|on|interval_low_percent	Table 2	0.089	3
+T2|Added|on|interval_high_percent	Table 2	0.383	3
+T2|Added|on|ratio_to_retained	Table 2	3.265	3
+T2|Added|on|upper_bound_percent	Table 2	1.011	3
+T2|Added|off|yeast	Table 2	271	exact
+T2|Added|off|n	Table 2	100238	exact
+T2|Added|off|observed_percent	Table 2	0.270	3
+T2|Added|off|interval_low_percent	Table 2	0.144	3
+T2|Added|off|interval_high_percent	Table 2	0.425	3
+T2|Added|off|ratio_to_retained	Table 2	3.256	3
+T2|Added|off|upper_bound_percent	Table 2	1.257	3
+T2|Added|standard|yeast	Table 2	384	exact
+T2|Added|standard|n	Table 2	125148	exact
+T2|Added|standard|observed_percent	Table 2	0.307	3
+T2|Added|standard|interval_low_percent	Table 2	0.146	3
+T2|Added|standard|interval_high_percent	Table 2	0.495	3
+T2|Added|standard|ratio_to_retained	Table 2	2.947	3
+T2|Added|standard|upper_bound_percent	Table 2	1.436	3
+T2|Lost|on|yeast	Table 2	142	exact
+T2|Lost|on|n	Table 2	40915	exact
+T2|Lost|on|observed_percent	Table 2	0.347	3
+T2|Lost|on|interval_low_percent	Table 2	0.177	3
+T2|Lost|on|interval_high_percent	Table 2	0.596	3
+T2|Lost|on|ratio_to_retained	Table 2	5.210	3
+T2|Lost|on|upper_bound_percent	Table 2	1.613	3
+T2|Lost|off|yeast	Table 2	161	exact
+T2|Lost|off|n	Table 2	28421	exact
+T2|Lost|off|observed_percent	Table 2	0.566	3
+T2|Lost|off|interval_low_percent	Table 2	0.289	3
+T2|Lost|off|interval_high_percent	Table 2	0.981	3
+T2|Lost|off|ratio_to_retained	Table 2	6.822	3
+T2|Lost|off|upper_bound_percent	Table 2	2.634	3
+T2|Lost|standard|yeast	Table 2	115	exact
+T2|Lost|standard|n	Table 2	32188	exact
+T2|Lost|standard|observed_percent	Table 2	0.357	3
+T2|Lost|standard|interval_low_percent	Table 2	0.188	3
+T2|Lost|standard|interval_high_percent	Table 2	0.591	3
+T2|Lost|standard|ratio_to_retained	Table 2	3.432	3
+T2|Lost|standard|upper_bound_percent	Table 2	1.672	3
+T2|final|on|observed_percent	Table 2 caption; P50	0.110	3
+T2|final|on|upper_bound_percent	Table 2 caption; P50	0.513	3
+T2|final|off|observed_percent	Table 2 caption; P50	0.140	3
+T2|final|off|upper_bound_percent	Table 2 caption; P50	0.649	3
+T2|final|standard|observed_percent	Table 2 caption; P50	0.171	3
+T2|final|standard|upper_bound_percent	Table 2 caption; P50	0.801	3
+T2|final|on|yeast/n	P50	382/346440	exact
+T2|r|on	Table 2 caption	0.2741	4
+T2|r|off	Table 2 caption	0.2741	4
+T2|r|standard	Table 2 caption	0.2718	4
+P44|lost kept group via other peptide	P44	34,666	exact
+P44|lost kept group via other peptide, %	P44	83.51	2
+P44|precursors wholly absent	P44	3,085	exact
+P44|human-only protein groups wholly absent	P44	432	exact
+Fig1C|F3|first|all	Figure 1C (Supplementary Data D14)	30.44	2
+Fig1C|F3|first|common	Figure 1C (Supplementary Data D14)	34.92	2
+Fig1C|F3|final|all	Figure 1C (Supplementary Data D14)	46.15	2
+Fig1C|F3|final|common	Figure 1C (Supplementary Data D14)	46.15	2
+Fig1C|F4|first|all	Figure 1C (Supplementary Data D14)	30.78	2
+Fig1C|F4|first|common	Figure 1C (Supplementary Data D14)	35.07	2
+Fig1C|F4|final|all	Figure 1C (Supplementary Data D14)	46.62	2
+Fig1C|F4|final|common	Figure 1C (Supplementary Data D14)	46.63	2
+Fig1C|F0|first|all	Figure 1C (Supplementary Data D14)	23.58	2
+Fig1C|F0|first|common	Figure 1C (Supplementary Data D14)	34.38	2
+Fig1C|F0|final|all	Figure 1C (Supplementary Data D14)	45.42	2
+Fig1C|F0|final|common	Figure 1C (Supplementary Data D14)	45.42	2
+P49|second_pass_only_vs_retained|low95	P49	1.510	3
+P49|second_pass_only_vs_retained|high95	P49	8.669	3
+P49|lost_vs_retained|low95	P49	2.013	3
+P49|lost_vs_retained|high95	P49	19.165	3
+P51|mixed/single-line ratio, pools of 16	P51	1.08	2
+P51|mixed/single-line ratio, pools of 6	P51	0.79	2
+S6|two-way interval, pools of 16	Supplement S6 (Table S6)	0.70 to 1.63	exact
+S6|two-way interval, pools of 6	Supplement S6 (Table S6)	0.40 to 1.50	exact
+P70|single-cell support ratio	P70	5.798	3
+P70|single-cell support counts	Supplement S3	105/17423 vs 22/21165	exact
+T3|Human|Retained|A	Table 3	79	exact
+T3|Human|Retained|P	Table 3	17523	exact
+T3|Human|Retained|n	Table 3	17602	exact
+T3|Human|Retained|fraction	Table 3	0.004488	sig4
+T3|Human|Retained|low95	Table 3	0.002575	sig4
+T3|Human|Retained|high95	Table 3	0.006851	sig4
+T3|Human|Added|A	Table 3	220	exact
+T3|Human|Added|P	Table 3	6488	exact
+T3|Human|Added|n	Table 3	6708	exact
+T3|Human|Added|fraction	Table 3	0.0328	sig4
+T3|Human|Added|low95	Table 3	0.02537	sig4
+T3|Human|Added|high95	Table 3	0.04179	sig4
+T3|Human|Lost|A	Table 3	22	exact
+T3|Human|Lost|P	Table 3	3465	exact
+T3|Human|Lost|n	Table 3	3487	exact
+T3|Human|Lost|fraction	Table 3	0.006309	sig4
+T3|Human|Lost|low95	Table 3	0.002449	sig4
+T3|Human|Lost|high95	Table 3	0.01157	sig4
+T3|Yeast|Retained|A	Table 3	1809	exact
+T3|Yeast|Retained|P	Table 3	13598	exact
+T3|Yeast|Retained|n	Table 3	15407	exact
+T3|Yeast|Retained|fraction	Table 3	0.1174	sig4
+T3|Yeast|Retained|low95	Table 3	0.07528	sig4
+T3|Yeast|Retained|high95	Table 3	0.1655	sig4
+T3|Yeast|Added|A	Table 3	1430	exact
+T3|Yeast|Added|P	Table 3	3490	exact
+T3|Yeast|Added|n	Table 3	4920	exact
+T3|Yeast|Added|fraction	Table 3	0.2907	sig4
+T3|Yeast|Added|low95	Table 3	0.2297	sig4
+T3|Yeast|Added|high95	Table 3	0.3493	sig4
+T3|Yeast|Lost|A	Table 3	181	exact
+T3|Yeast|Lost|P	Table 3	2334	exact
+T3|Yeast|Lost|n	Table 3	2515	exact
+T3|Yeast|Lost|fraction	Table 3	0.07197	sig4
+T3|Yeast|Lost|low95	Table 3	0.04069	sig4
+T3|Yeast|Lost|high95	Table 3	0.1204	sig4
+T3|E. coli|Retained|A	Table 3	1348	exact
+T3|E. coli|Retained|P	Table 3	16717	exact
+T3|E. coli|Retained|n	Table 3	18065	exact
+T3|E. coli|Retained|fraction	Table 3	0.07462	sig4
+T3|E. coli|Retained|low95	Table 3	0.06192	sig4
+T3|E. coli|Retained|high95	Table 3	0.09028	sig4
+T3|E. coli|Added|A	Table 3	1196	exact
+T3|E. coli|Added|P	Table 3	3662	exact
+T3|E. coli|Added|n	Table 3	4858	exact
+T3|E. coli|Added|fraction	Table 3	0.2462	sig4
+T3|E. coli|Added|low95	Table 3	0.2135	sig4
+T3|E. coli|Added|high95	Table 3	0.2878	sig4
+T3|E. coli|Lost|A	Table 3	106	exact
+T3|E. coli|Lost|P	Table 3	2340	exact
+T3|E. coli|Lost|n	Table 3	2446	exact
+T3|E. coli|Lost|fraction	Table 3	0.04334	sig4
+T3|E. coli|Lost|low95	Table 3	0.03019	sig4
+T3|E. coli|Lost|high95	Table 3	0.05961	sig4
+T3|Pooled|Retained|A	Table 3	3236	exact
+T3|Pooled|Retained|P	Table 3	47838	exact
+T3|Pooled|Retained|n	Table 3	51074	exact
+T3|Pooled|Retained|fraction	Table 3	0.06336	sig4
+T3|Pooled|Retained|low95	Table 3	0.04939	sig4
+T3|Pooled|Retained|high95	Table 3	0.07945	sig4
+T3|Pooled|Added|A	Table 3	2846	exact
+T3|Pooled|Added|P	Table 3	13640	exact
+T3|Pooled|Added|n	Table 3	16486	exact
+T3|Pooled|Added|fraction	Table 3	0.1726	sig4
+T3|Pooled|Added|low95	Table 3	0.1498	sig4
+T3|Pooled|Added|high95	Table 3	0.1965	sig4
+T3|Pooled|Lost|A	Table 3	309	exact
+T3|Pooled|Lost|P	Table 3	8139	exact
+T3|Pooled|Lost|n	Table 3	8448	exact
+T3|Pooled|Lost|fraction	Table 3	0.03658	sig4
+T3|Pooled|Lost|low95	Table 3	0.02565	sig4
+T3|Pooled|Lost|high95	Table 3	0.05118	sig4
+P53|per-run added fraction min, %	P53	2.70	2
+P53|per-run added fraction max, %	P53	4.45	2
+P53|added above retained in every human-only run	P53	True	bool
+T4|First pass|with_A	Table 4	101	exact
+T4|First pass|with_n	Table 4	21,089	exact
+T4|First pass|with_percent	Table 4	0.479	3
+T4|First pass|alone_A	Table 4	108	exact
+T4|First pass|alone_n	Table 4	21,107	exact
+T4|First pass|alone_percent	Table 4	0.512	3
+T4|First pass|with_P	Table 4	20,988	exact
+T4|First pass|alone_P	Table 4	20,999	exact
+T4|Final result|with_A	Table 4	299	exact
+T4|Final result|with_n	Table 4	24,310	exact
+T4|Final result|with_percent	Table 4	1.230	3
+T4|Final result|alone_A	Table 4	118	exact
+T4|Final result|alone_n	Table 4	25,681	exact
+T4|Final result|alone_percent	Table 4	0.459	3
+T4|Final result|with_P	Table 4	24,011	exact
+T4|Final result|alone_P	Table 4	25,563	exact
+T4|Retained|with_A	Table 4	79	exact
+T4|Retained|with_n	Table 4	17,602	exact
+T4|Retained|with_percent	Table 4	0.449	3
+T4|Retained|alone_A	Table 4	79	exact
+T4|Retained|alone_n	Table 4	17,981	exact
+T4|Retained|alone_percent	Table 4	0.439	3
+T4|Retained|with_P	Table 4	17,523	exact
+T4|Retained|alone_P	Table 4	17,902	exact
+T4|Added|with_A	Table 4	220	exact
+T4|Added|with_n	Table 4	6,708	exact
+T4|Added|with_percent	Table 4	3.280	3
+T4|Added|alone_A	Table 4	39	exact
+T4|Added|alone_n	Table 4	7,700	exact
+T4|Added|alone_percent	Table 4	0.506	3
+T4|Added|with_P	Table 4	6,488	exact
+T4|Added|alone_P	Table 4	7,661	exact
+T4|Lost|with_A	Table 4	22	exact
+T4|Lost|with_n	Table 4	3,487	exact
+T4|Lost|with_percent	Table 4	0.631	3
+T4|Lost|alone_A	Table 4	29	exact
+T4|Lost|alone_n	Table 4	3,126	exact
+T4|Lost|alone_percent	Table 4	0.928	3
+T4|Lost|with_P	Table 4	3,465	exact
+T4|Lost|alone_P	Table 4	3,097	exact
+P56|fewer wrong-organism additions alone, %	P56	82	0
+P54|first-pass wrong-organism fraction Y, %	P54 (about 11%)	11	0
+P54|first-pass wrong-organism fraction E, %	P54 (about 7%)	7	0
+P54|pooled T/R ratio	P54	2.725	3
+P54|pooled T/R low95	P54	2.244	3
+P54|pooled T/R high95	P54	3.307	3
+P54|pooled L/R ratio	P54	0.5773	4
+P54|pooled L/R low95	P54	0.4409	4
+P54|pooled L/R high95	P54	0.7367	4
+P70|250 pg support ratio high/low	P70	2.95	2
+P70|250 pg support counts	Supplement S3	214/593 vs 304/2485	exact
+P56|human final wrong-organism fraction, at least 5 of 6, %	P56	0.4249	4
+P56|human identifications kept, at least 5 of 6, %	P56	71.24	2
+P61|Y|R|missed two-fold	P61	49/709	exact
+P61|Y|R|missed two-fold, %	P22, P61, P77	6.91	2
+P61|Y|T|missed two-fold	P61	191/417	exact
+P61|Y|T|missed two-fold, %	P22, P61, P77	45.80	2
+P61|E|R|missed two-fold	P61	51/1046	exact
+P61|E|R|missed two-fold, %	P22, P61, P77	4.88	2
+P61|E|T|missed two-fold	P61	190/603	exact
+P61|E|T|missed two-fold, %	P22, P61, P77	31.51	2
+P61|Y|T|wrong sign, %	P61	9.35	2
+P61|Y|R|wrong sign, %	P61	0.42	2
+P61|jan16|yeast median log2 FC|D	P61	1.953	3
+P61|jan16|yeast median log2 FC|R	P61	1.735	3
+P61|jan16|yeast median log2 FC|F	P61	1.570	3
+P61|jan16|yeast median log2 FC|T	P61	1.048	3
+P61|jan09|yeast median log2 FC|D	P61	2.108	3
+P61|jan09|yeast median log2 FC|R	P61	1.866	3
+P61|jan09|yeast median log2 FC|F	P61	1.620	3
+P61|jan09|yeast median log2 FC|T	P61	1.064	3
+P62|Y|added ions in low tercile	P62	304	exact
+P62|E|added ions in low tercile	P62	434	exact
+P62|Y|low-tercile T minus R bias	P62 (compressed by 0.3374)	-0.3374	4
+P62|E|low-tercile T minus R bias	P62 (compressed by 0.3007)	0.3007	4
+P62|Y|P1 MAE change	P62 (lowered by 0.0620)	-0.0620	4
+P62|E|P1 MAE change	P62 (lowered by 0.0563)	-0.0563	4
+P62|jan16|added MAE smaller on R/T intersection (of 2)	P62 (three of four, with jan09)	2	exact
+P62|jan09|added MAE smaller on R/T intersection (of 2)	P62 (three of four, with jan16)	1	exact
+Fig2|Y|R|ions	Figure 2 caption	709	exact
+Fig2|Y|T|ions	Figure 2 caption	417	exact
+Fig2|E|R|ions	Figure 2 caption	1,046	exact
+Fig2|E|T|ions	Figure 2 caption	603	exact
+Fig2|Y|ions in both panels	Figure 2 caption (some ions in both panels)	14	exact
+Fig2|E|ions in both panels	Figure 2 caption (some ions in both panels)	42	exact
+S10|first|49|identified precursors	Supplement S9, Table S10	127	exact
+S10|first|50|identified precursors	Supplement S9, Table S10	0	exact
+S10|first|51|identified precursors	Supplement S9, Table S10	51	exact
+S10|first|52|identified precursors	Supplement S9, Table S10	0	exact
+S10|first|53|identified precursors	Supplement S9, Table S10	0	exact
+S10|first|54|identified precursors	Supplement S9, Table S10	0	exact
+S10|final|49|identified precursors	Supplement S9, Table S10	545	exact
+S10|final|50|identified precursors	Supplement S9, Table S10	149	exact
+S10|final|51|identified precursors	Supplement S9, Table S10	129	exact
+S10|final|52|identified precursors	Supplement S9, Table S10	0	exact
+S10|final|53|identified precursors	Supplement S9, Table S10	0	exact
+S10|final|54|identified precursors	Supplement S9, Table S10	0	exact
+P40|designed runs	P40	54	exact
+P40|runs of kind mixture	P40	30	exact
+P40|runs of kind single	P40	18	exact
+P40|runs of kind blank	P40	6	exact

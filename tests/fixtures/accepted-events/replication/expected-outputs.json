@@ -1,0 +1,20 @@
+{
+  "outputs": {
+    "fc_precursors.tsv": {
+      "sha256": "1e65cbace112504b9f4dd296db86a53940b7ad9f3c21136e632ada7cf20f069a",
+      "bytes": 23337
+    },
+    "fc_summary.tsv": {
+      "sha256": "e93527ace4b7e2fd86591aa2eeb2d6c77e3586baf5dfe1e39eeed9c93435f08a",
+      "bytes": 17465
+    },
+    "fc_unavailable.tsv": {
+      "sha256": "e7852049960d4a8e687a355168abc52512c28309b2f0cda7852d2f9c4be82ae7",
+      "bytes": 27
+    },
+    "keys.tsv": {
+      "sha256": "d9836947715c369812eeb4f1c029506b4eb5b7c7902e4b5cadfb25ef2ea41aeb",
+      "bytes": 482
+    }
+  }
+}

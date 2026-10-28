@@ -1,0 +1,16 @@
+# Python 3.12. Versions used to reproduce the article.
+pandas==3.0.3
+numpy==2.5.1
+pyarrow==24.0.0
+scipy==1.18.0
+PyYAML==6.0.3
+threadpoolctl==3.6.0
+openpyxl==3.1.5
+# Figures
+matplotlib==3.11.1
+pillow==12.3.0
+lxml==6.1.1
+PyMuPDF==1.28.0
+# Optional: only scripts that call mbraudit.library.opportunity_audit.audit (candidate census of every predicted
+# library) need it; the restricted-library census and every other step run without it.
+# pyahocorasick

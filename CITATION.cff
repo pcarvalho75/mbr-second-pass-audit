@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below and the two dataset papers (PXD048434, PXD056832)."
+title: "Completeness at a cost: auditing the second pass of match-between-runs in single-cell DIA proteomics (analysis code)"
+type: software
+license: MIT
+version: "6.0"
+# doi: add the Zenodo DOI of this release when it is minted
+authors:
+  - family-names: Martins
+    given-names: Aline M. A.
+  - family-names: Fischer
+    given-names: Juliana S. G.
+  - family-names: dos Santos
+    given-names: Marlon D. M.
+  - family-names: Sales
+    given-names: Lucas
+  - family-names: Luz
+    given-names: Isabelle
+    orcid: "https://orcid.org/0000-0001-8722-5103"
+  - family-names: Muotri
+    given-names: Alysson R.
+    orcid: "https://orcid.org/0000-0003-0867-2875"
+  - family-names: Carvalho
+    given-names: Paulo C.
+    orcid: "https://orcid.org/0000-0001-6530-3350"
+preferred-citation:
+  type: article
+  title: "Completeness at a cost: auditing the second pass of match-between-runs in single-cell DIA proteomics"
+  journal: "Briefings in Bioinformatics"
+  # doi: add the article DOI on publication
+  authors:
+    - family-names: Martins
+      given-names: Aline M. A.
+    - family-names: Fischer
+      given-names: Juliana S. G.
+    - family-names: dos Santos
+      given-names: Marlon D. M.
+    - family-names: Sales
+      given-names: Lucas
+    - family-names: Luz
+      given-names: Isabelle
+    - family-names: Muotri
+      given-names: Alysson R.
+    - family-names: Carvalho
+      given-names: Paulo C.

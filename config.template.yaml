@@ -1,0 +1,90 @@
+# Copy this file to config.local.yaml (ignored by git) and point each entry at your copy of the inputs.
+# Relative paths resolve from the folder that holds the configuration file. Inputs are only read, never written.
+# The processed-data archive (Zenodo, DOI to be added) holds every file named below; docs/DATA.md lists them.
+
+output_dir: outputs
+
+# The single-cell dataset (PXD048434): 64 human cells searched against human plus yeast trap sequences.
+single_cell:
+  target_fasta: external/fasta/HomoSapiens_swissprot.fasta          # human sequences
+  entrapment_fasta: external/fasta/HomoSapiens_sp_SC_entrap.fasta   # human plus yeast trap sequences
+  # One DIA-NN two-pass search per configuration; each folder holds
+  # report-first-pass.parquet, report.parquet and report-lib.parquet.
+  configurations:
+    "on": external/single-cell/refinement-on            # original search (protein-informed q-values, DIA-NN default)
+    "off": external/single-cell/refinement-off          # same inputs and library, --no-refine-q
+    "standard": external/single-cell/standard-library   # standard predicted library, --no-refine-q
+  # Searches of fixed pools of 6 or 16 cells (one cell line or all four), used for the pool comparison.
+  pools:
+    homogeneous_6_1: external/single-cell/pools/H6-1
+    homogeneous_6_2: external/single-cell/pools/H6-2
+    homogeneous_6_3: external/single-cell/pools/H6-3
+    homogeneous_6_4: external/single-cell/pools/H6-4
+    mixed_6_1: external/single-cell/pools/M6-1
+    mixed_6_2: external/single-cell/pools/M6-2
+    mixed_6_3: external/single-cell/pools/M6-3
+    mixed_6_4: external/single-cell/pools/M6-4
+    homogeneous_16_HeLa: external/single-cell/pools/H16-HeLa
+    homogeneous_16_HepG2: external/single-cell/pools/H16-HepG2
+    homogeneous_16_A549: external/single-cell/pools/H16-A549
+    homogeneous_16_H1975: external/single-cell/pools/H16-H1975
+    mixed_16_1: external/single-cell/pools/M16-1
+    mixed_16_2: external/single-cell/pools/M16-2
+    mixed_16_3: external/single-cell/pools/M16-3
+    mixed_16_4: external/single-cell/pools/M16-4
+
+# Candidate counts of the predicted libraries (the ratio r of Methods 2.3). The released table is in references/;
+# scripts/step_candidates.py regenerates it from the libraries (needs the optional pyahocorasick package).
+candidate_counts: references/candidate-counts.tsv
+libraries:
+  restricted:
+    library: external/libraries/restricted/predicted.speclib
+    fasta: external/fasta/HomoSapiens_sp_SC_entrap.fasta
+    expected_precursors: 1745123
+  standard:
+    library: external/libraries/standard/predicted.speclib
+    fasta: external/fasta/HomoSapiens_sp_SC_entrap.fasta
+    expected_precursors: 5878654
+  three_organism:
+    library: external/libraries/three-organism/predicted.speclib
+    fasta: external/fasta/human-yeast-ecoli.fasta
+    registry: external/fasta/species_registry.tsv
+    expected_precursors: 6468920
+
+# The 250 pg dataset (PXD056832).
+pg250:
+  # Fixed species map of the three-organism predicted library (written by the candidate audit).
+  predicted_species: external/pg250/predicted_species.parquet
+  primary:                       # all 54 runs analysed together (16 January mixtures)
+    first: external/pg250/primary/report-first-pass.parquet
+    final: external/pg250/primary/report.parquet
+    empirical: external/pg250/primary/report-lib.parquet
+    design: design/samples54.tsv
+    exports: design/export-status-primary.tsv
+    stats_first: external/pg250/primary/report-first-pass.stats.tsv
+    stats_final: external/pg250/primary/report.stats.tsv
+    log: external/pg250/primary/report.log.txt
+  replication:                   # 9 January mixtures, searched separately; fold changes only
+    first: external/pg250/replication/report-first-pass.parquet
+    final: external/pg250/replication/report.parquet
+    design: design/samples54-replication.tsv
+    exports: design/export-status-replication.tsv
+  within_organism:               # each organism's six single-organism runs analysed alone
+    H:
+      first: external/pg250/within-H/report-first-pass.parquet
+      final: external/pg250/within-H/report.parquet
+      empirical: external/pg250/within-H/report-lib.parquet
+      design: design/samples6-H.tsv
+      exports: design/export-status-within-H.tsv
+    Y:
+      first: external/pg250/within-Y/report-first-pass.parquet
+      final: external/pg250/within-Y/report.parquet
+      empirical: external/pg250/within-Y/report-lib.parquet
+      design: design/samples6-Y.tsv
+      exports: design/export-status-within-Y.tsv
+    E:
+      first: external/pg250/within-E/report-first-pass.parquet
+      final: external/pg250/within-E/report.parquet
+      empirical: external/pg250/within-E/report-lib.parquet
+      design: design/samples6-E.tsv
+      exports: design/export-status-within-E.tsv

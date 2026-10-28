@@ -1,0 +1,36 @@
+{
+  "outputs": {
+    "t3_summary.tsv": {
+      "sha256": "4041318e0293248ae218cd8162f4579338a17da1d3e31f2cb8a1cc793f751add",
+      "bytes": 602738
+    },
+    "t3_coverage.tsv": {
+      "sha256": "9b96ea9780e3fec53653aa89e0bb46ae6c383ced870214f644af2c0894e3520c",
+      "bytes": 34742
+    },
+    "t3_membership.tsv": {
+      "sha256": "c9f2188274040ec227c65bf0386701d41a8ff748723e8544cb0295a600b88c4f",
+      "bytes": 27003
+    },
+    "t3_unavailable.tsv": {
+      "sha256": "52b9cec5fa8d196d8574475f3f43c7d7ced9fd337886a07fd7d8cbe68271559b",
+      "bytes": 41
+    },
+    "fc_precursors.tsv": {
+      "sha256": "3c5dc302df7ead60d79cf0a36961edf7b5cf9d647cfed706186931a4b283337e",
+      "bytes": 23337
+    },
+    "fc_summary.tsv": {
+      "sha256": "e93527ace4b7e2fd86591aa2eeb2d6c77e3586baf5dfe1e39eeed9c93435f08a",
+      "bytes": 17465
+    },
+    "fc_unavailable.tsv": {
+      "sha256": "e7852049960d4a8e687a355168abc52512c28309b2f0cda7852d2f9c4be82ae7",
+      "bytes": 27
+    },
+    "keys.tsv": {
+      "sha256": "d9836947715c369812eeb4f1c029506b4eb5b7c7902e4b5cadfb25ef2ea41aeb",
+      "bytes": 482
+    }
+  }
+}
