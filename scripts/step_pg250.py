@@ -1,9 +1,9 @@
 """The 250 pg dataset, one co-search: accepted events, wrong-organism classes and fold changes.
 
 --study primary (all 54 runs, 16 January mixtures): accepted events, retained/added/lost classes of the 18
-single-organism runs, A/P counts, two-way bootstrap intervals and contrasts (Tables 3, 4, S7; Figure 1B),
+single-organism runs, A/P counts, two-way bootstrap intervals and contrasts (Tables 3, 4, S7; Figure 1C),
 then completeness selection and fold changes (Tables S8, S11; Figure 2). About 25 minutes.
---study replication (9 January mixtures): accepted events and fold changes only (Table S11, D33).
+--study replication (9 January mixtures): accepted events and fold changes only (Table S11, D10).
 Outputs: <output_dir>/pg250/<study>/export and .../fold-change.
 """
 from _setup import setup, note

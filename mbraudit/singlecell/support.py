@@ -31,7 +31,7 @@ def support_intervals(reports,c2,output):
     for cohort,aliases in cohorts:
         for alias in aliases:
             data=c2 if alias=='all_cells_64' else load_quantity(reports,alias)
-            a,b=filtered_pair(data,'F3');selected=b.loc[~b.direct].copy()
+            a,b=filtered_pair(data,'F1');selected=b.loc[~b.direct].copy()
             selected['quantity_tercile'],cuts=quantity_terciles(a,selected)
             for row in cuts:thresholds.append({'cohort':cohort,'pool':alias,**row})
             denominator=len(data['cells'])-1
@@ -41,7 +41,7 @@ def support_intervals(reports,c2,output):
                     part=selected if tercile=='all' else selected[selected.quantity_tercile.eq(tercile)]
                     for label in labels:
                         frame=part[part['bin'].eq(label)]
-                        records.append({'cohort':cohort,'pool':alias,'filter':'F3','bin_scheme':scheme,
+                        records.append({'cohort':cohort,'pool':alias,'filter':'F1','bin_scheme':scheme,
                             'quantity_tercile':tercile,'support_bin':label,**species_record(frame.species)})
             print('Support cells and original-bin sensitivity',alias,'complete.',flush=True)
     perpool=pd.DataFrame(records)

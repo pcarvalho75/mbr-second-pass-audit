@@ -1,7 +1,9 @@
 """Completeness selection, fold changes and whole-pass arithmetic on the released synthetic fixtures.
 
 The two fixtures (accepted events, designed samples, run status) and their expected output hashes were released
-with the earlier code version; the recomputed tables must match them byte for byte.
+with the earlier code version; the recomputed tables must match them byte for byte. The hashes were refreshed once,
+when the filter labels were renamed to those of the article (F3 -> F1, F4 -> F2, F0 -> F3); the tables are otherwise
+those of the earlier version (same rows and values; fc_summary.tsv and t3_summary.tsv are sorted by the label).
 """
 import csv
 import json
@@ -52,15 +54,15 @@ class Arithmetic(unittest.TestCase):
                              (row['search_space_scale_fraction'], row['search_space_scale_percent'], row['Search-space scale']))
 
     def test_whole_final_result_counts_retained_and_added_once(self):
-        rows = [{'filter': 'F3', 'class': 'retained', 'yeast': '164', 'species_exclusive_denominator': '246201'},
-                {'filter': 'F3', 'class': 'second_pass_only', 'yeast': '218', 'species_exclusive_denominator': '100239'}]
+        rows = [{'filter': 'F1', 'class': 'retained', 'yeast': '164', 'species_exclusive_denominator': '246201'},
+                {'filter': 'F1', 'class': 'second_pass_only', 'yeast': '218', 'species_exclusive_denominator': '100239'}]
         result = final_single_cell_bound(rows, 1365729, 374286)
         self.assertEqual((result['yeast'], result['denominator']), (382, 346440))
         self.assertEqual((result['lower_percent'], result['estimated_upper_percent']), ('0.110', '0.513'))
 
     def test_table4_sums_counts_rather_than_averaging_fractions(self):
         def rows(values):
-            return [{'endpoint': 'T1', 'mask': 'F3', 'scope': 'organism', 'group': 'H', 'tercile': 'all',
+            return [{'endpoint': 'T1', 'mask': 'F1', 'scope': 'organism', 'group': 'H', 'tercile': 'all',
                      'class': cls, 'A': str(a), 'P': str(p)} for cls, a, p in values]
         mixed = rows([('R', 79, 17523), ('T', 220, 6488), ('L', 22, 3465)])
         own = rows([('R', 79, 17902), ('T', 39, 7661), ('L', 29, 3097)])

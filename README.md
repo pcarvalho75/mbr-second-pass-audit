@@ -28,8 +28,8 @@ All searches used DIA-NN 2.5.1 in two-pass mode. The settings, command lines and
 ## What the code does
 
 1. **Read both reports of each search.** The first-pass report and the final report, with targets only.
-2. **Apply the same filter to both passes.** F3, the primary filter, keeps a precursor when its run, global and library
-   q-values are all at most 0.01. F4 adds the three protein-group q-values; F0 uses the run q-value alone.
+2. **Apply the same filter to both passes.** F1, the primary filter, keeps a precursor when its run, global and library
+   q-values are all at most 0.01. F2 adds the three protein-group q-values; F3 uses the run q-value alone.
 3. **Sort every observation into a class.** An observation is one precursor (modified sequence plus charge) in one cell
    or run. Retained: accepted in both passes. Added: final result only. Lost: first pass only, split by whether it is in
    the empirical library.
@@ -43,10 +43,12 @@ All searches used DIA-NN 2.5.1 in two-pass mode. The settings, command lines and
    result only the lower bound holds). 250 pg: the wrong-organism fraction of each class in the
    single-organism runs, with two-way intervals.
 7. **Compare analyses of different sets of runs.** The six human-only runs analysed with the other 48 runs and on
-   their own; cell-line pools of one line against pools of four lines.
+   their own; cell-line pools of one line against pools of four lines; and, post hoc, whether the wrong-organism
+   identifications added to the human-only runs look like carryover from the runs acquired before them.
 8. **Test fold changes.** Yeast and E. coli differ four-fold between two of the mixtures; the code computes each
    peptide ion's fold change by class and how often it misses a two-fold change.
-9. **Write the tables, figures and Supplementary Data**, and check every number against the article.
+9. **Write the tables, the main and supplementary figures and Supplementary Data**, and check every number against
+   the article.
 
 ## Quick start
 
@@ -66,7 +68,7 @@ To reproduce the article from the archived inputs (Zenodo, DOI to be added), cop
 python scripts/run_all.py        # about 50 minutes; outputs go to the configured output_dir
 ```
 
-`run_all.py` runs each step in turn and ends with `verify.py`, which compares 308 numbers with the article and reports
+`run_all.py` runs each step in turn and ends with `verify.py`, which compares 362 numbers with the article and reports
 any difference. Each step can also be run alone; [docs/RESULTS-MAP.md](docs/RESULTS-MAP.md) lists the step, output
 file and expected value of every table, figure and number.
 
@@ -74,14 +76,15 @@ file and expected value of every table, figure and number.
 
 | Path | Content |
 | --- | --- |
-| `mbraudit/` | The package. `species.py`, `filters.py`: acceptance, organism calls and the F0/F3/F4 filters. `singlecell/`: reports, classes and completeness (`accounting.py`), bootstrap intervals (`bootstrap.py`, `intervals.py`), support (`support.py`), configurations side by side (`configurations.py`), pools (`composition.py`), upper bounds (`scales.py`), library census (`candidates.py`, `census.py`). `pg250/`: the 250 pg dataset (`endpoints.py`, `fold_change*.py`, `within_organism.py`, `posthoc_fc.py`, `summary.py`, `native_qa.py`). `library/`: readers of DIA-NN predicted libraries. `figures/`, `tables.py`, `workbook.py`, `key_numbers.py`: outputs. |
+| `mbraudit/` | The package. `species.py`, `filters.py`: acceptance, organism calls and the F1/F2/F3 filters. `singlecell/`: reports, classes and completeness (`accounting.py`), bootstrap intervals (`bootstrap.py`, `intervals.py`), support (`support.py`), configurations side by side (`configurations.py`), pools (`composition.py`), upper bounds (`scales.py`), library census (`candidates.py`, `census.py`). `pg250/`: the 250 pg dataset (`endpoints.py`, `fold_change*.py`, `within_organism.py`, `posthoc_fc.py`, `summary.py`, `native_qa.py`, `carryover.py`). `library/`: readers of DIA-NN predicted libraries. `figures/`, `tables.py`, `workbook.py`, `key_numbers.py`: outputs. |
 | `scripts/` | One entry script per analysis step, table set or figure, and `run_all.py`. |
 | `design/` | Sample sheets of the 250 pg searches and their export-status tables. |
 | `references/` | The candidate counts of the predicted libraries and the published values checked by `verify.py`. |
 | `tests/` | Unit tests, released synthetic fixtures and a synthetic end-to-end run. |
 | `docs/` | Results map, methods in code, data and reproduction notes. |
 
-The scientific functions are copied unchanged from the code that produced the published numbers; only input, output
+The scientific functions are copied unchanged from the code that produced the published numbers, except that the
+filter labels were renamed to match the article (F3->F1, F4->F2, F0->F3; nothing else changed); only input, output
 and configuration handling was rewritten. [docs/METHODS-IN-CODE.md](docs/METHODS-IN-CODE.md) maps each definition of
 the Methods to its function, and [docs/REPRODUCTION.md](docs/REPRODUCTION.md) records the reproduction result.
 

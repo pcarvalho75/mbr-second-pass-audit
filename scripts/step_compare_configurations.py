@@ -1,5 +1,5 @@
 """Single-cell dataset: side-by-side tables of the original search (refinement on) and each repeat search
-(refinement off; standard library), and each configuration's empirical-library candidate ratio (Tables 1, 2, S72).
+(refinement off; standard library), and each configuration's empirical-library candidate ratio (Tables 1, 2, S3).
 
 Needs step_single_cell.py for on, off and standard. Outputs: <output_dir>/single-cell/comparison-off and
 comparison-standard (prefix original_ = refinement on, norefine_ = the repeat search).

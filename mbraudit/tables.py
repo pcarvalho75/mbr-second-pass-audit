@@ -38,9 +38,9 @@ def table1(single_cell):
                 ('Final common-row completeness, %', 'cov', 'final_common_row_completeness')]
     values = {}
     for conf in CONFIGS:
-        acc = _read(single_cell / conf / 'accounting' / 'accounting.tsv').set_index('filter').loc['F3']
+        acc = _read(single_cell / conf / 'accounting' / 'accounting.tsv').set_index('filter').loc['F1']
         cov = _read(single_cell / conf / 'accounting' / 'represented_coverage.tsv')
-        cov = cov[cov['filter'].eq('F3') & cov.level.eq('precursor')].iloc[0]
+        cov = cov[cov['filter'].eq('F1') & cov.level.eq('precursor')].iloc[0]
         values[conf] = {'acc': acc, 'cov': cov}
     rows = []
     for label, source, column in measures:
@@ -70,7 +70,7 @@ def search_space_scales(candidate_counts, single_cell):
             raise ValueError('Expected one one-way candidate ratio for ' + library)
         h, y = int(selected[0]['H']), int(selected[0]['Y'])
         for row in _rows(path):
-            if row['filter'] != 'F3' or row['class'] not in ['retained', 'second_pass_only', 'lost', 'lost_library_present', 'lost_library_excluded']:
+            if row['filter'] != 'F1' or row['class'] not in ['retained', 'second_pass_only', 'lost', 'lost_library_present', 'lost_library_excluded']:
                 continue
             f = row[prefix + 'observed_yeast_fraction']
             fraction, percent, shown = scale_point(f, h, y, setting, row['class'])
@@ -94,7 +94,7 @@ def table2(single_cell, candidate_counts):
         species = _rows(single_cell / conf / 'accounting' / 'class_species.tsv')
         intervals = _read(single_cell / conf / 'intervals' / 'class_intervals.tsv')
         ratios = _read(single_cell / conf / 'intervals' / 'class_ratio_intervals.tsv')
-        f3 = {r['class']: r for r in species if r['filter'] == 'F3'}
+        f1 = {r['class']: r for r in species if r['filter'] == 'F1'}
         for cls, label in [('retained', 'Retained'), ('second_pass_only', 'Added'), ('lost', 'Lost')]:
             point = intervals[intervals['class'].eq(cls) & intervals.scheme.eq('two_way')].iloc[0]
             if cls == 'retained':
@@ -102,9 +102,9 @@ def table2(single_cell, candidate_counts):
             else:
                 rr = ratios[ratios.contrast.eq(cls + '_vs_retained') & ratios.scheme.eq('two_way')].iloc[0]
                 ratio = float(rr.point)
-            rows.append({'class': label, 'configuration': conf, 'yeast': int(f3[cls]['yeast']),
-                         'n': int(f3[cls]['species_exclusive_denominator']),
-                         'observed_percent': 100 * float(f3[cls]['observed_yeast_fraction']),
+            rows.append({'class': label, 'configuration': conf, 'yeast': int(f1[cls]['yeast']),
+                         'n': int(f1[cls]['species_exclusive_denominator']),
+                         'observed_percent': 100 * float(f1[cls]['observed_yeast_fraction']),
                          'interval_low_percent': 100 * float(point.low95), 'interval_high_percent': 100 * float(point.high95),
                          'ratio_to_retained': ratio,
                          'upper_bound_percent': float(scales[conf, cls]['search_space_scale_percent'])})
@@ -126,7 +126,7 @@ def table3(export):
     for group, label in [('H', 'Human'), ('Y', 'Yeast'), ('E', 'E. coli'), ('all', 'Pooled')]:
         scope = 'pooled' if group == 'all' else 'organism'
         for cls, name in [('R', 'Retained'), ('T', 'Added'), ('L', 'Lost')]:
-            row = counts[counts.endpoint.eq('T1') & counts['mask'].eq('F3') & counts.scope.eq(scope) & counts['group'].eq(group) & counts['class'].eq(cls)].iloc[0]
+            row = counts[counts.endpoint.eq('T1') & counts['mask'].eq('F1') & counts.scope.eq(scope) & counts['group'].eq(group) & counts['class'].eq(cls)].iloc[0]
             i = two_way.loc[int(row.endpoint_id)]
             rows.append({'organism': label, 'class': name, 'A': int(row.A), 'P': int(row.P), 'n': int(row.n),
                          'fraction': float(row.absent_fraction), 'low95': float(i.low95), 'high95': float(i.high95)})
@@ -143,7 +143,7 @@ def table4(primary_export, within_human):
     def classes(rows):
         out = {}
         for cls in ['R', 'T', 'L']:
-            r = [x for x in rows if x['endpoint'] == 'T1' and x['mask'] == 'F3' and x['scope'] == 'organism' and x['group'] == 'H' and x['tercile'] == 'all' and x['class'] == cls][0]
+            r = [x for x in rows if x['endpoint'] == 'T1' and x['mask'] == 'F1' and x['scope'] == 'organism' and x['group'] == 'H' and x['tercile'] == 'all' and x['class'] == cls][0]
             out[cls] = (int(r['A']), int(r['P']))
         return out
     with_mix, on_own = classes(mixed), classes(alone)

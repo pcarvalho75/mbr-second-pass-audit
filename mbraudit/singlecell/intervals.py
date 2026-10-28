@@ -54,7 +54,7 @@ def class_intervals(reports,loaded,output):
     from mbraudit.singlecell.accounting import filtered_pair
     from mbraudit.singlecell.reports import KEY
     from mbraudit.singlecell.bootstrap import interval,ratio
-    a,b=filtered_pair(loaded,'F3')
+    a,b=filtered_pair(loaded,'F1')
     final=set(zip(b.Run,b.key))
     retained=a.loc[[(c,k) in final for c,k in zip(a.Run,a.key)]]
     lost=a.loc[[(c,k) not in final for c,k in zip(a.Run,a.key)]]
@@ -77,7 +77,7 @@ def class_intervals(reports,loaded,output):
             intervals.append({'class':name,'scheme':scheme,'yeast':points[name][0],
                 'species_exclusive_denominator':points[name][1],'point':float(fraction(*points[name])),
                 **stats,'seed':SEED,'recipients':len(loaded['cells']),'precursor_blocks':nkeys,
-                'bootstrap_universe':'joint union of four disjoint F3 observation classes'})
+                'bootstrap_universe':'joint union of four disjoint F1 observation classes'})
         for numerator in ['second_pass_only','lost']:
             values=ratio(counts[numerator][0],counts[numerator][1],counts['retained'][0],counts['retained'][1])
             point=float(ratio(*points[numerator],*points['retained']))

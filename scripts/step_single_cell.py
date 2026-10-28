@@ -1,5 +1,5 @@
 """Single-cell dataset, one search configuration: retained, added and lost observations, represented entities,
-completeness, yeast trap fractions with two-way intervals, and first-pass support (Tables 1, 2, S71, S72; Figure 1).
+completeness, yeast trap fractions with two-way intervals, and first-pass support (Tables 1, 2, S3 to S5; Figure 1).
 
 Order of calls is that of the original analysis: accounting, support strata, workflows, candidate scales, figure
 tables, then joint class intervals and support intervals.
@@ -24,7 +24,7 @@ def main():
     out4 = config.output_dir('single-cell', args.configuration, 'accounting')
     out5 = config.output_dir('single-cell', args.configuration, 'intervals')
     reports = Reports()
-    # This configuration's own empirical-library census (Supplementary Data D5; the empirical scale of Table S3).
+    # This configuration's own empirical-library census (Supplementary Data D1; the empirical scale of Table S3).
     # The original run passed the refinement-on census to every configuration; each now uses its own.
     census = config.output_root() / 'single-cell' / ('empirical-census-' + args.configuration + '.tsv')
     library = config.single_cell_report_dir('all_cells_64') / 'report-lib.parquet'

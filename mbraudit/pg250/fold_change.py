@@ -6,7 +6,7 @@ import pandas as pd
 from scipy import sparse
 from mbraudit.pg250.guard import require_guard
 SPECIES = ('H', 'Y', 'E', 'shared', 'shared_IL', 'unknown')
-MASKS = ('F0', 'F3', 'F4')
+MASKS = ('F3', 'F1', 'F2')
 STAGES = ('first', 'final')
 KEY = ['Modified.Sequence', 'Precursor.Charge']
 SEED = 20261018

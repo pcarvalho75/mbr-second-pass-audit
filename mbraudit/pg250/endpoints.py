@@ -10,7 +10,7 @@ from scipy.sparse import coo_matrix
 from mbraudit.library.opportunity_audit import strip_mods
 KEY = ['Modified.Sequence', 'Precursor.Charge']
 EVENT = ['sample'] + KEY
-MASKS = {'F0': ['Q.Value'], 'F3': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value'], 'F4': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value', 'PG.Q.Value', 'Global.PG.Q.Value', 'Lib.PG.Q.Value']}
+MASKS = {'F3': ['Q.Value'], 'F1': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value'], 'F2': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value', 'PG.Q.Value', 'Global.PG.Q.Value', 'Lib.PG.Q.Value']}
 SPECIES = ['H', 'Y', 'E', 'shared', 'shared_IL', 'unknown', 'quarantined']
 TERCILES = ['low', 'middle', 'high', 'missing_quantity']
 BINS = ['zero', 'positive_0_20', 'positive_20_40', 'positive_40_60', 'positive_60_100']
@@ -135,7 +135,7 @@ def adapt_reports(config, design, out):
             if col not in raw:
                 raw[col] = np.nan
             raw[col] = pd.to_numeric(raw[col], errors='coerce')
-        for field in MASKS['F4']:
+        for field in MASKS['F2']:
             if field in raw:
                 q = pd.to_numeric(q_source[field], errors='coerce')
                 raw[field] = pd.to_numeric(raw[field], errors='coerce')

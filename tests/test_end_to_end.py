@@ -52,7 +52,7 @@ class EndToEnd(unittest.TestCase):
     def test_pg250_classes_partition(self):
         counts = pd.read_csv(self.root / 'outputs' / 'pg250' / 'primary' / 'export' / 'endpoint_counts.tsv', sep='\t', keep_default_na=False)
         t1 = counts[(counts.endpoint == 'T1') & (counts.scope == 'organism')].set_index(['mask', 'group', 'class']).events
-        for mask in ['F0', 'F3', 'F4']:
+        for mask in ['F1', 'F2', 'F3']:
             for group in 'HYE':
                 self.assertEqual(t1[mask, group, 'D'], t1[mask, group, 'R'] + t1[mask, group, 'L'])
                 self.assertEqual(t1[mask, group, 'F'], t1[mask, group, 'R'] + t1[mask, group, 'T'])

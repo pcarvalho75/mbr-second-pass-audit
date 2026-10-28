@@ -38,19 +38,19 @@ def compute(root, candidate_counts):
             add(f"T1|{row['measure']}|{conf}", row[conf], f'single-cell/{conf}/accounting')
     on = sc / 'on' / 'accounting'
     cls = _read(on / 'class_species.tsv')
-    lost = _one(cls, filter='F3', **{'class': 'lost'})
-    add('P44|lost kept group via other peptide', int(lost.same_cell_group_other_peptide_in_final), 'class_species.tsv F3 lost')
-    add('P44|lost kept group via other peptide, %', 100 * float(lost.same_cell_group_other_peptide_in_final_fraction), 'class_species.tsv F3 lost')
+    lost = _one(cls, filter='F1', **{'class': 'lost'})
+    add('P44|lost kept group via other peptide', int(lost.same_cell_group_other_peptide_in_final), 'class_species.tsv F1 lost')
+    add('P44|lost kept group via other peptide, %', 100 * float(lost.same_cell_group_other_peptide_in_final_fraction), 'class_species.tsv F1 lost')
     ent = _read(on / 'entity_species.tsv')
-    add('P44|precursors wholly absent', int(_one(ent, filter='F3', level='precursor', state='wholly_absent').observations), 'entity_species.tsv')
+    add('P44|precursors wholly absent', int(_one(ent, filter='F1', level='precursor', state='wholly_absent').observations), 'entity_species.tsv')
     hum = _read(on / 'human_group_losses.tsv')
-    add('P44|human-only protein groups wholly absent', int(_one(hum, filter='F3').human_groups_wholly_absent), 'human_group_losses.tsv')
+    add('P44|human-only protein groups wholly absent', int(_one(hum, filter='F1').human_groups_wholly_absent), 'human_group_losses.tsv')
     cov = _read(on / 'represented_coverage.tsv')
-    for filt in ['F3', 'F4', 'F0']:
+    for filt in ['F1', 'F2', 'F3']:
         row = _one(cov, filter=filt, level='precursor')
         for phase in ['first', 'final']:
             for universe in ['all', 'common']:
-                add(f'Fig1C|{filt}|{phase}|{universe}', 100 * float(row[f'{phase}_{universe}_row_completeness']), 'represented_coverage.tsv')
+                add(f'Fig1B|{filt}|{phase}|{universe}', 100 * float(row[f'{phase}_{universe}_row_completeness']), 'represented_coverage.tsv')
     # Table 2 and the trap numbers.
     rows, whole = tables.table2(sc, candidate_counts)
     for r in rows:
@@ -71,7 +71,7 @@ def compute(root, candidate_counts):
         add(f'P51|mixed/single-line ratio, pools of {n}', float(_one(pools, cohort=f'composition_{n}', scheme='two_way').point), 'A_composition_uncertainty.tsv')
         add(f'S6|two-way interval, pools of {n}', f"{float(_one(pools, cohort=f'composition_{n}', scheme='two_way').low95):.2f} to {float(_one(pools, cohort=f'composition_{n}', scheme='two_way').high95):.2f}", 'A_composition_uncertainty.tsv')
     sup = _read(sc / 'on' / 'intervals' / 'support_contrasts.tsv')
-    row = _one(sup, cohort='all_cells_64', filter='F3', bin_scheme='current_three_positive', quantity_tercile='high', support_bin='low_positive')
+    row = _one(sup, cohort='all_cells_64', filter='F1', bin_scheme='current_three_positive', quantity_tercile='high', support_bin='low_positive')
     add('P70|single-cell support ratio', float(row.fraction_ratio), 'support_contrasts.tsv')
     add('P70|single-cell support counts', f'{int(row.numerator_yeast)}/{int(row.numerator_n)} vs {int(row.reference_yeast)}/{int(row.reference_n)}', 'support_contrasts.tsv')
 
@@ -83,7 +83,7 @@ def compute(root, candidate_counts):
     counts = _read(export / 'endpoint_counts.tsv', keep_default_na=False)
     design = pd.read_csv(Path(__file__).resolve().parents[1] / 'design' / 'samples54.tsv', sep='\t', keep_default_na=False)
     human_runs = design[(design.kind == 'single') & (design.present_species == 'H')]['sample']
-    t1 = counts[(counts.endpoint == 'T1') & (counts['mask'] == 'F3') & (counts.scope == 'run')]
+    t1 = counts[(counts.endpoint == 'T1') & (counts['mask'] == 'F1') & (counts.scope == 'run')]
     added = t1[(t1['class'] == 'T') & t1['group'].isin(human_runs)].set_index('group').absent_fraction.astype(float)
     kept = t1[(t1['class'] == 'R') & t1['group'].isin(human_runs)].set_index('group').absent_fraction.astype(float)
     add('P53|per-run added fraction min, %', 100 * added.min(), 'endpoint_counts.tsv run scope')
@@ -102,13 +102,13 @@ def compute(root, candidate_counts):
     points = _read(export / 'contrasts.tsv')
     limits = _read(export / 'contrast_intervals.tsv')
     for numerator in ['T', 'L']:
-        sel = dict(endpoint='T1', mask='F3', scope='pooled', group='all', numerator=numerator, reference='R')
+        sel = dict(endpoint='T1', mask='F1', scope='pooled', group='all', numerator=numerator, reference='R')
         p = points.loc[(points[list(sel)].astype(str) == pd.Series(sel)).all(axis=1)].iloc[0]
         lim = limits.loc[(limits[list(sel)].astype(str) == pd.Series(sel)).all(axis=1) & limits.scheme.eq('two_way') & limits.statistic.eq('ratio')].iloc[0]
         add(f'P54|pooled {numerator}/R ratio', float(p.fraction_ratio), 'contrasts.tsv')
         add(f'P54|pooled {numerator}/R low95', float(lim.low95), 'contrast_intervals.tsv')
         add(f'P54|pooled {numerator}/R high95', float(lim.high95), 'contrast_intervals.tsv')
-    sel = dict(endpoint='T2', mask='F3', scope='pooled', group='all', tercile='high', numerator='positive_60_100', reference='positive_0_20')
+    sel = dict(endpoint='T2', mask='F1', scope='pooled', group='all', tercile='high', numerator='positive_60_100', reference='positive_0_20')
     p = points.loc[(points[list(sel)].astype(str) == pd.Series(sel)).all(axis=1)].iloc[0]
     add('P70|250 pg support ratio high/low', float(p.fraction_ratio), 'contrasts.tsv T2')
     add('P70|250 pg support counts', f'{int(p.numerator_A)}/{int(p.numerator_n)} vs {int(p.reference_A)}/{int(p.reference_n)}', 'contrasts.tsv T2')
@@ -116,13 +116,13 @@ def compute(root, candidate_counts):
     fold = pg / 'primary' / 'fold-change'
     t3 = _read(fold / 't3_summary.tsv', keep_default_na=False)
     cov3 = _read(fold / 't3_coverage.tsv', keep_default_na=False)
-    row = _one(t3, mask='F3', organism='H', scheme='stage_specific', stage='final', threshold=5, transition='F', scope='group', unit='events')
+    row = _one(t3, mask='F1', organism='H', scheme='stage_specific', stage='final', threshold=5, transition='F', scope='group', unit='events')
     add('P56|human final wrong-organism fraction, at least 5 of 6, %', 100 * float(row.false_fraction), 't3_summary.tsv')
-    row = _one(cov3, mask='F3', organism='H', scheme='stage_specific', stage='final', threshold=5, transition='F')
+    row = _one(cov3, mask='F1', organism='H', scheme='stage_specific', stage='final', threshold=5, transition='F')
     add('P56|human identifications kept, at least 5 of 6, %', 100 * float(row.present_event_coverage), 't3_coverage.tsv')
     # Fold changes (Results 3.5, Figure 2).
     post = _read(pg / 'posthoc-fc' / 'summary.tsv', keep_default_na=False)
-    base = post[(post.batch == 'jan16') & (post['mask'] == 'F3') & (post.quantity == 'Precursor.Normalised')]
+    base = post[(post.batch == 'jan16') & (post['mask'] == 'F1') & (post.quantity == 'Precursor.Normalised')]
     for sp in ['Y', 'E']:
         for ctx in ['R', 'T']:
             row = _one(base, species=sp, endpoint='P2', context=ctx, metric='missed_twofold')
@@ -137,7 +137,7 @@ def compute(root, candidate_counts):
         add(f'P62|{sp}|P1 MAE change', float(_one(base, species=sp, endpoint='P1', metric='MAE_change').point), 'posthoc summary P1')
     for study, tag in [('primary', 'jan16'), ('replication', 'jan09')]:
         fs = _read(pg / study / 'fold-change' / 'fc_summary.tsv', keep_default_na=False)
-        fs = fs[(fs['mask'] == 'F3') & (fs.quantity == 'Precursor.Normalised')]
+        fs = fs[(fs['mask'] == 'F1') & (fs.quantity == 'Precursor.Normalised')]
         for ctx in ['D', 'R', 'F', 'T']:
             add(f'P61|{tag}|yeast median log2 FC|{ctx}', float(_one(fs, species='Y', context=ctx, population='own_context').median_observed_log2fc), 'fc_summary.tsv')
         better = 0
@@ -160,6 +160,11 @@ def compute(root, candidate_counts):
         q = _read(qa, keep_default_na=False)
         for _, r in q[q.kind == 'blank'].iterrows():
             add(f"S10|{r['pass']}|{r.manifest_ordinal}|identified precursors", int(r['Precursors.Identified']), 'native-run-qa.tsv')
+    carry = pg / 'carryover' / 'carryover.tsv'
+    if carry.exists():
+        c = _read(carry, keep_default_na=False, dtype={'acquisition_id': str, 'organism': str})
+        for r in c.itertuples():
+            add('|'.join(['S9', r.section] + [x for x in [r.acquisition_id, r.organism] if x] + [r.measure]), r.value, 'carryover.tsv')
     add('P40|designed runs', len(design), 'design/samples54.tsv')
     for kind, n in design.kind.value_counts().items():
         add(f'P40|runs of kind {kind}', int(n), 'design/samples54.tsv')

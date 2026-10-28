@@ -6,7 +6,7 @@ import pandas as pd
 from mbraudit.pg250.fold_change_replication import interval, SEED
 DRAWS = 2000
 QUANTITIES = ('Precursor.Normalised', 'Precursor.Quantity')
-MASKS = ('F3', 'F0', 'F4')
+MASKS = ('F1', 'F3', 'F2')
 _SEAL = object()
 
 def digest(path):
@@ -107,7 +107,7 @@ def analyse(guard):
                         raise ValueError('Incomplete frozen context universe')
                     values = {c: p.observed_log2fc.to_numpy(float) for c, p in piv.items()}
                     elig = {c: p.eligible.fillna(False).to_numpy(bool) for c, p in piv.items()}
-                    base = {'batch': study, 'mask': mask, 'species': sp, 'quantity': quantity, 'post_hoc': True, 'display': 'primary' if mask == 'F3' and quantity == QUANTITIES[0] else 'sensitivity'}
+                    base = {'batch': study, 'mask': mask, 'species': sp, 'quantity': quantity, 'post_hoc': True, 'display': 'primary' if mask == 'F1' and quantity == QUANTITIES[0] else 'sensitivity'}
 
                     def population(kind, selection, extra=None):
                         name = '|'.join([study, mask, sp, quantity, kind])

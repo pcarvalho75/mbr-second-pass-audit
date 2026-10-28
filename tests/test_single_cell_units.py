@@ -18,19 +18,19 @@ from mbraudit.singlecell.support import original_bin, wilson
 
 
 class Filters(unittest.TestCase):
-    def test_f0_f3_f4_are_literal_conjunctions(self):
+    def test_f1_f2_f3_are_literal_conjunctions(self):
         frame = pd.DataFrame({'Q.Value': [0.01, 0.01, 0.01, 0.02], 'Global.Q.Value': [0.01, 0.02, 0.01, 0.0],
                               'Lib.Q.Value': [0.0, 0.0, 0.01, 0.0], 'PG.Q.Value': [0.01, 0.0, 0.02, 0.0],
                               'Global.PG.Q.Value': [0.0, 0.0, 0.0, 0.0], 'Lib.PG.Q.Value': [0.0, 0.0, 0.0, 0.0]})
-        self.assertEqual(filter_mask(frame, 'F0').tolist(), [True, True, True, False])
-        self.assertEqual(filter_mask(frame, 'F3').tolist(), [True, False, True, False])
-        self.assertEqual(filter_mask(frame, 'F4').tolist(), [True, False, False, False])
+        self.assertEqual(filter_mask(frame, 'F1').tolist(), [True, False, True, False])
+        self.assertEqual(filter_mask(frame, 'F2').tolist(), [True, False, False, False])
+        self.assertEqual(filter_mask(frame, 'F3').tolist(), [True, True, True, False])
         with self.assertRaises(KeyError):
             filter_mask(frame, 'F9')
 
     def test_missing_fields_do_not_pass_once_filled_with_two(self):
         frame = pd.DataFrame({c: [np.nan] for c in ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value', 'PG.Q.Value', 'Global.PG.Q.Value', 'Lib.PG.Q.Value']})
-        self.assertFalse(filter_mask(frame.fillna(2.), 'F3').iloc[0])
+        self.assertFalse(filter_mask(frame.fillna(2.), 'F1').iloc[0])
 
 
 class Species(unittest.TestCase):

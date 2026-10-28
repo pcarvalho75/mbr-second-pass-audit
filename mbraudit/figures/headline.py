@@ -1,4 +1,5 @@
-"""Figure 1 panels A and B (carried from figures/make_headline.py:render)."""
+"""Figure 1 panels A and C (carried from figures/make_headline.py:render; the class-ratio panel, B in the original,
+is lettered C because the completeness panel now sits between the two)."""
 
 
 def render(pipeline, panels):
@@ -48,9 +49,9 @@ def render(pipeline, panels):
             pipeline.interval(forest, y, entry, 'point', 'low95', 'high95', color=color, marker=marker)
             text = f"{float(entry['point']):.3f} [{float(entry['low95']):.3f}, {float(entry['high95']):.3f}]"
             values.text(0, y, text, color=color, va='center', fontsize=11.5)
-    labels = [row['label'].replace(': ', ':\n', 1).replace(' (pooled F3)', '\n(pooled F3)') for row in panels['B']]
+    labels = [row['label'].replace(': ', ':\n', 1).replace(' (pooled F1)', '\n(pooled F1)') for row in panels['B']]
     forest.set(xscale='log', xlim=(0.3, 30), ylim=(3.65, -0.9), yticks=list(range(4)), yticklabels=labels, xlabel='Wrong-organism fraction ratio (class / retained)')
-    forest.set_title('B  Class-relative fractions (two-way 95% intervals)', loc='left', fontsize=15, pad=43)
+    forest.set_title('C  Class-relative fractions (two-way 95% intervals)', loc='left', fontsize=15, pad=43)
     forest.axvline(1, color=grey, linestyle='--', linewidth=1)
     forest.xaxis.set_major_locator(FixedLocator([0.5, 1, 2, 5, 10, 20]))
     forest.xaxis.set_major_formatter(FuncFormatter(lambda v, p: f'{v:g}'))

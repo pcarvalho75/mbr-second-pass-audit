@@ -73,7 +73,7 @@ class Posthoc(unittest.TestCase):
 
     def row(self, endpoint, metric, species='Y', **fields):
         f = self.summary
-        mask = (f.batch == 'SYN_A') & (f['mask'] == 'F3') & (f.quantity == 'Precursor.Normalised') & (f.species == species) & (f.endpoint == endpoint) & (f.metric == metric)
+        mask = (f.batch == 'SYN_A') & (f['mask'] == 'F1') & (f.quantity == 'Precursor.Normalised') & (f.species == species) & (f.endpoint == endpoint) & (f.metric == metric)
         for key, value in fields.items():
             mask &= f[key].eq(value)
         return f[mask].iloc[0]
@@ -109,7 +109,7 @@ class WithinOrganism(unittest.TestCase):
 
         def row(sample, key, decoy=0, quantity=10):
             return {'sample': sample, s.KEY[0]: key, s.KEY[1]: 2, 'Decoy': decoy, 'Precursor.Quantity': quantity, 'Precursor.Normalised': quantity,
-                    **{field: .001 for field in s.MASKS['F4']}}
+                    **{field: .001 for field in s.MASKS['F2']}}
         first = [row(n, 'SYN_A') for n in names[:5]] + [row(names[i], 'SYN_B') for i in [0, 1]] + [row(names[0], 'SYN_A', 1, 1000)]
         final = [row(names[i], 'SYN_A') for i in [0, 2, 3, 4]] + [row(names[0], 'SYN_B'), row(names[0], 'SYN_T', quantity=20), row(names[2], 'SYN_U', quantity=0)]
         empirical = pd.DataFrame([{s.KEY[0]: 'SYN_A', s.KEY[1]: 2, 'Decoy': 0}])
@@ -127,7 +127,7 @@ class WithinOrganism(unittest.TestCase):
         out = Path(self.temp.name) / 'results'
         pipeline.within_organism(files, out, 'H', synthetic=True)
         summary = pd.read_csv(out / 'endpoint_counts.tsv', sep='\t')
-        rows = summary[(summary['mask'] == 'F3') & (summary.endpoint == 'T1') & (summary.scope == 'organism')].set_index('class')
+        rows = summary[(summary['mask'] == 'F1') & (summary.endpoint == 'T1') & (summary.scope == 'organism')].set_index('class')
         self.assertEqual(rows.events.to_dict(), {'D': 7, 'F': 7, 'R': 5, 'T': 2, 'L': 2, 'L_in_library': 1, 'L_outside_library': 1})
         self.assertEqual((rows.loc['D', 'A'], rows.loc['D', 'P']), (2, 5))
         self.assertEqual((rows.loc['T', 'A'], rows.loc['T', 'P'], rows.loc['T', 'excluded_unknown']), (1, 0, 1))

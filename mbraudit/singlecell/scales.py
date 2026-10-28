@@ -21,7 +21,7 @@ def scale_point(f, human, yeast, configuration, category):
         return str(value), str(percent), f'{percent:.3f}'
 
 
-def final_single_cell_bound(rows, human_candidates, yeast_candidates, mask='F3'):
+def final_single_cell_bound(rows, human_candidates, yeast_candidates, mask='F1'):
     selected = [r for r in rows if r['filter'] == mask and r['class'] in ['retained', 'second_pass_only']]
     if len(selected) != 2:
         raise ValueError('Expected retained and added class counts')

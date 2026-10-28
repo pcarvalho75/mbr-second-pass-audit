@@ -89,7 +89,7 @@ class Reports:
         self.cache[alias] = raw
         return raw
 
-    def arm(self, aliases, filter_name='F0', first=False):
+    def arm(self, aliases, filter_name='F3', first=False):
         parts = []
         for alias in aliases:
             data = self.load(alias)

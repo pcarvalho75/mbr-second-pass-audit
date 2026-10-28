@@ -1,8 +1,8 @@
 """Classes retained, added and lost; represented entities, completeness and species composition.
 
 Carried from analysis/revision3_analysis.py (coverage and loss helpers), analysis/revision2_analysis.py
-(workflow_definitions) and analysis/revision4_analysis.py. Bodies are unchanged; only in-body imports point to
-the new modules.
+(workflow_definitions) and analysis/revision4_analysis.py. Bodies are unchanged except the filter labels (renamed
+to match the article: F3->F1, F4->F2, F0->F3); only in-body imports point to the new modules.
 """
 from collections import defaultdict
 import json
@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-FILTERS=('F3','F4','F0')
+FILTERS=('F1','F2','F3')
 
 
 LEVELS=('precursor','peptide','protein_group')
@@ -136,14 +136,14 @@ def loss_entities(first,final,lost,filter_name):
 
 def workflow_definitions():
     from mbraudit.singlecell.design import H16,M16
-    return [('first_pass','F0',['all_cells_64'],True),
-            ('all_cells_F0','F0',['all_cells_64'],False),
+    return [('first_pass','F3',['all_cells_64'],True),
             ('all_cells_F3','F3',['all_cells_64'],False),
-            ('all_cells_F4','F4',['all_cells_64'],False),
-            ('homogeneous_16_F0','F0',list(H16),False),
-            ('homogeneous_16_F4','F4',list(H16),False),
-            ('mixed_16_F0','F0',list(M16),False),
-            ('mixed_16_F4','F4',list(M16),False)]
+            ('all_cells_F1','F1',['all_cells_64'],False),
+            ('all_cells_F2','F2',['all_cells_64'],False),
+            ('homogeneous_16_F3','F3',list(H16),False),
+            ('homogeneous_16_F2','F2',list(H16),False),
+            ('mixed_16_F3','F3',list(M16),False),
+            ('mixed_16_F2','F2',list(M16),False)]
 
 
 def species_record(labels):
@@ -270,7 +270,7 @@ def global_tail(first,final):
     allkeys=set(first.key);finalkeys=set(final.key)
     good=set(first.loc[first['Global.Q.Value'].le(.01),'key'])
     failed=allkeys-good;absent=allkeys-finalkeys
-    return {'first_F0_keys':len(allkeys),'final_F0_keys':len(finalkeys),'wholly_absent_F0_keys':len(absent),
+    return {'first_F3_keys':len(allkeys),'final_F3_keys':len(finalkeys),'wholly_absent_F3_keys':len(absent),
         'first_keys_without_any_Global_Q_at_or_below_0_01':len(failed),
         'globally_failing_keys_wholly_absent_final':len(failed&absent),
         'globally_failing_keys_present_final':len(failed&finalkeys),
@@ -298,7 +298,7 @@ def all_cell_accounting(reports,loaded,output):
     first['original_quantity_percentile']=positive.groupby(first.Run).rank(method='average',pct=True)
     first['original_first_pass_recurrence']=first.key.map(first.groupby('key').Run.nunique())
     accounts=[];cover=[];classes=[];compositions=[];entity_ledger=[];human=[];losses=[];lost_ledgers=[]
-    fp0=event_keys(first);fin0=event_keys(final)
+    fp3=event_keys(first);fin3=event_keys(final)
     for filt in FILTERS:
         a,b=filtered_pair(loaded,filt)
         ak,bk=event_keys(a),event_keys(b)
@@ -306,11 +306,11 @@ def all_cell_accounting(reports,loaded,output):
         lost=a.loc[[(c,k) not in bk for c,k in zip(a.Run,a.key)]].copy()
         only=b.loc[~b.direct].copy()
         lost['loss_category']=np.where(lost.key.isin(librarykeys),'library_present_absent_final','library_excluded')
-        accounts.append({'filter':filt,'primary':filt=='F3','first_observations':len(a),'final_observations':len(b),
+        accounts.append({'filter':filt,'primary':filt=='F1','first_observations':len(a),'final_observations':len(b),
             'retained_observations':len(retained),'second_pass_only_observations':len(only),'lost_observations':len(lost),
             'lost_library_present':int(lost.key.isin(librarykeys).sum()),'lost_library_excluded':int((~lost.key.isin(librarykeys)).sum()),
-            'second_pass_only_with_F0_firstpass':sum((c,k) in fp0 for c,k in zip(only.Run,only.key)),
-            'lost_with_F0_final':sum((c,k) in fin0 for c,k in zip(lost.Run,lost.key)),
+            'second_pass_only_with_F3_firstpass':sum((c,k) in fp3 for c,k in zip(only.Run,only.key)),
+            'lost_with_F3_final':sum((c,k) in fin3 for c,k in zip(lost.Run,lost.key)),
             'net_observation_change_fraction':len(b)/len(a)-1})
         cover.extend(coverage(a,b,loaded['cells'],filt));losses.extend(loss_entities(a,b,lost,filt))
         a['filtered_first_pass_recurrence']=a.key.map(a.groupby('key').Run.nunique())
@@ -369,7 +369,7 @@ def support_strata(reports,loaded_cache,output):
                 totals.append({'cohort':cohort,'pool':alias,'filter':filt,'second_pass_only_observations':len(selected),
                     'quantity_unavailable':int(selected.quantity_tercile.eq('quantity_unavailable').sum()),
                     'same_filter_support_denominator':denom,
-                    'second_pass_only_with_F0_firstpass':sum((c,k) in original_own for c,k in zip(selected.Run,selected.key))})
+                    'second_pass_only_with_F3_firstpass':sum((c,k) in original_own for c,k in zip(selected.Run,selected.key))})
                 for tercile in ['all',*TERCILES,'quantity_unavailable']:
                     subset=selected if tercile=='all' else selected[selected.quantity_tercile.eq(tercile)]
                     for label in BINS:
@@ -434,7 +434,7 @@ def workflows(reports,loaded_cache,output):
         previous=pd.concat(alternatives,ignore_index=True) if alternatives else selected
         record=species_record(selected.species)
         row={'workflow':name,'filter':filt,'accepted_observations':len(frame),'second_pass_only_observations':len(selected),
-            'second_pass_only_relative_to_F0_firstpass':len(previous),'reclassified_from_F0_firstpass':len(selected)-len(previous),
+            'second_pass_only_relative_to_F3_firstpass':len(previous),'reclassified_from_F3_firstpass':len(selected)-len(previous),
             'represented_precursors':frame.key.nunique(),'represented_protein_groups':frame['Protein.Group'].dropna().replace('',np.nan).nunique(),
             'accepted_observation_retention_same_filter':len(frame)/len(ref[filt]),
             'represented_precursor_retention_same_filter':frame.key.nunique()/ref[filt].key.nunique(),

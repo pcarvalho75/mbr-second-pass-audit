@@ -1,9 +1,9 @@
 """Tables 1 to 4 of the manuscript, from the pipeline outputs.
 
-Table 1: retained, added and lost observations, represented precursors and completeness (single cells, F3).
+Table 1: retained, added and lost observations, represented precursors and completeness (single cells, F1).
 Table 2: yeast trap fractions by class, two-way intervals, ratios to retained and estimated upper bounds.
 Table 3: wrong-organism identifications in the single-organism runs of the 250 pg dataset (all 54 runs).
-Table 4: human-only runs analysed with and without the mixtures.
+Table 4: human-only runs analysed with the other 48 runs and on their own.
 Outputs: <output_dir>/tables/table1.tsv ... table4.tsv (full precision) and tables.md (printed rounding).
 """
 from _setup import setup, REPO

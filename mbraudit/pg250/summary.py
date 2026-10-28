@@ -4,7 +4,7 @@ from decimal import Decimal, localcontext
 from pathlib import Path
 
 
-def accepted_passes(rows, organism, mask='F3'):
+def accepted_passes(rows, organism, mask='F1'):
     """Retained plus lost is first pass;retained plus added is the final pass."""
     selected = {}
     for category in ['R', 'T', 'L']:
@@ -30,7 +30,7 @@ def read(path):
         return list(csv.DictReader(handle, delimiter='\t'))
 
 
-def added_count_comparison(mixed_rows, own_rows, organism='H', mask='F3'):
+def added_count_comparison(mixed_rows, own_rows, organism='H', mask='F1'):
     def one(rows):
         found = [r for r in rows if r['endpoint'] == 'T1' and r['mask'] == mask and r['scope'] == 'organism'
                  and r['group'] == organism and r['tercile'] == 'all' and r.get('context', r.get('class')) == 'T']

@@ -1,4 +1,4 @@
-"""Figure 1 panel C source and shared drawing helpers (carried from figures/make_figures.py).
+"""Figure 1 panel B source and shared drawing helpers (carried from figures/make_figures.py).
 
 TABLES and OUTPUT are set by the entry script (plumbing).
 """
@@ -84,8 +84,8 @@ def primary_flow():
     rows = read('r4a_figure_flow.tsv')
     accounting = read('r4a_central_accounting.tsv')
     coverage = read('r4a_figure_completeness.tsv')
-    base = one(accounting, filter='F3', level='precursor')
-    selected = {name: one(rows, filter='F3', **{'class': name}) for name in ['first_pass', 'retained', 'second_pass_only', 'lost_library_present', 'lost_library_excluded']}
+    base = one(accounting, filter='F1', level='precursor')
+    selected = {name: one(rows, filter='F1', **{'class': name}) for name in ['first_pass', 'retained', 'second_pass_only', 'lost_library_present', 'lost_library_excluded']}
     fig = plt.figure(figsize=(11.5, 10.2))
     grid = fig.add_gridspec(3, 2, height_ratios=[1.0, 1.3, 1.9], width_ratios=[2.2, 1.0], hspace=0.4, wspace=0.55)
     a = fig.add_subplot(grid[0, :])
@@ -130,11 +130,11 @@ def primary_flow():
     loss.tick_params(labelsize=12)
     for key in ['first_observations', 'final_observations']:
         record('1', key, base, [key])
-    a.set(yticks=[1, 0.53], yticklabels=[f"First pass\n{int(base['first_observations']):,}", f"Final\n{int(base['final_observations']):,}"], ylim=(0.2, 1.35), xlim=(0, maximum), title='A  Primary F3 accepted-set accounting', xlabel='Precursor-cell observations')
+    a.set(yticks=[1, 0.53], yticklabels=[f"First pass\n{int(base['first_observations']):,}", f"Final\n{int(base['final_observations']):,}"], ylim=(0.2, 1.35), xlim=(0, maximum), title='A  Primary F1 accepted-set accounting', xlabel='Precursor-cell observations')
     from matplotlib.ticker import FuncFormatter
     loss.xaxis.set_major_formatter(FuncFormatter(lambda v, pos: f'{v / 1000:g}k' if v else '0'))
     a.xaxis.set_major_formatter(FuncFormatter(lambda v, pos: f'{v / 1000:g}k' if v else '0'))
-    for j, filt in enumerate(['F3', 'F4', 'F0']):
+    for j, filt in enumerate(['F1', 'F2', 'F3']):
         row = one(coverage, filter=filt, level='precursor')
         for delta, phase, universe, color, hatch in [(-0.36, 'first', 'all', BLUE, '//'), (-0.12, 'final', 'all', ORANGE, '//'), (0.12, 'first', 'common', BLUE, ''), (0.36, 'final', 'common', ORANGE, '')]:
             field = phase + '_' + universe + '_row_completeness_pct'
@@ -143,6 +143,6 @@ def primary_flow():
             b.barh(j + delta, v, height=0.15, color=color, hatch=hatch, edgecolor='white', linewidth=0.7, label=label if j == 0 else None)
             b.text(v + 0.3, j + delta, f'{v:.2f}', va='center', fontsize=14)
             record('1', filt + ' ' + field, row, [field])
-    b.set(yticks=range(3), yticklabels=['F3 (primary)', 'F4', 'F0 (naive)'], ylim=(2.6, -0.6), xlim=(0, 56), xlabel='Finite positive precursor-cell entries (%)', title='B  Own-row and common-row completeness')
+    b.set(yticks=range(3), yticklabels=['F1 (primary)', 'F2', 'F3 (naive)'], ylim=(2.6, -0.6), xlim=(0, 56), xlabel='Finite positive precursor-cell entries (%)', title='B  Own-row and common-row completeness')
     b.legend(frameon=False, ncol=2, loc='upper left', bbox_to_anchor=(0, -0.22), fontsize=13.5)
     save(fig, 'figure01_accounting')

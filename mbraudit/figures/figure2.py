@@ -1,11 +1,11 @@
 """Figure 2: fold changes of retained and added peptide ions against their intensity (16 January mixtures).
 
 points() is a plain function of the fold-change table and the accepted events:
-- y is each eligible ion's class fold change (fc_precursors.tsv, F3, Precursor.Normalised, contexts R and T):
+- y is each eligible ion's class fold change (fc_precursors.tsv, F1, Precursor.Normalised, contexts R and T):
   median log2 quantity in 5H4Y1E minus median log2 quantity in 5H1Y4E, with at least two positive
   quantities in each mixture (computed upstream by fold_change.fc);
 - x is the median log2 of the ion's positive, finite final-result Precursor.Normalised over the twelve
-  5H4Y1E and 5H1Y4E runs (F3 accepted events), divided by log2(10). This is the abundance that
+  5H4Y1E and 5H1Y4E runs (F1 accepted events), divided by log2(10). This is the abundance that
   posthoc_fc.analyse uses for its P3 terciles, so an ion has the same x in both panels.
 Numbers are parsed with Python float() from text, as the post hoc analysis does, so values agree to the last bit.
 draw() renders the two panels with 0.3-log10 binned medians (bins with at least 10 ions).
@@ -30,7 +30,7 @@ def _text(path, usecols=None):
 
 def points(fc_path, keys_path, events_path, samples_path):
     fc = _text(fc_path)
-    fc = fc[(fc['mask'] == 'F3') & (fc.quantity == QUANTITY) & fc.context.isin(['R', 'T']) & (fc.eligible == 'True')].copy()
+    fc = fc[(fc['mask'] == 'F1') & (fc.quantity == QUANTITY) & fc.context.isin(['R', 'T']) & (fc.eligible == 'True')].copy()
     fc['key'] = fc.key.map(float).astype(int)
     fc['observed_log2fc'] = fc.observed_log2fc.map(float)
     keys = _text(keys_path)
@@ -38,7 +38,7 @@ def points(fc_path, keys_path, events_path, samples_path):
     samples = _text(samples_path)
     axis = samples[(samples.kind == 'mixture') & samples['group'].isin(['5H4Y1E', '5H1Y4E'])]
     events = _text(events_path, usecols=['sample', 'Modified.Sequence', 'Precursor.Charge', 'species', 'mask', 'stage', QUANTITY])
-    events = events[(events.stage == 'final') & (events['mask'] == 'F3') & events['sample'].isin(axis['sample'])].copy()
+    events = events[(events.stage == 'final') & (events['mask'] == 'F1') & events['sample'].isin(axis['sample'])].copy()
     events[QUANTITY] = events[QUANTITY].map(lambda x: np.nan if x == 'NA' else float(x))
     events = events[events[QUANTITY].gt(0) & np.isfinite(events[QUANTITY])]
     events = events.merge(keys[['key', 'Modified.Sequence', 'Precursor.Charge']], on=['Modified.Sequence', 'Precursor.Charge'], how='left', validate='many_to_one')

@@ -44,7 +44,7 @@ def comparison_tables(old4,old5,new4,new5,output,oldr,newr):
     a=read(old4/'accounting.tsv');b=read(new4/'accounting.tsv')
     cols=['first_observations','final_observations','retained_observations','second_pass_only_observations',
         'lost_observations','lost_library_present','lost_library_excluded','net_observation_change_fraction',
-        'second_pass_only_with_F0_firstpass','lost_with_F0_final']
+        'second_pass_only_with_F3_firstpass','lost_with_F3_final']
     accounting=paired_tables(a,b,['filter'],cols)
     for col in cols:accounting['change_'+col]=accounting['norefine_'+col]-accounting['original_'+col]
     accounting.to_csv(output/'accounting_comparison.tsv',sep='\t',index=False)
@@ -96,7 +96,7 @@ def comparison_tables(old4,old5,new4,new5,output,oldr,newr):
     assessments=[]
     for configuration,ac,cv,cl,sp in [('original_default',a,read(old4/'represented_coverage.tsv'),classes[0],f_old),
         ('disabled_refinement',b,read(new4/'represented_coverage.tsv'),classes[1],f_new)]:
-        for filt in ['F3','F4','F0']:
+        for filt in ['F1','F2','F3']:
             account=ac[ac['filter'].eq(filt)].iloc[0];coverage_row=cv[cv['filter'].eq(filt)&cv.level.eq('precursor')].iloc[0]
             classrows=cl[cl['filter'].eq(filt)].set_index('class')
             assessments.append({'configuration':configuration,'filter':filt,'accepted_observations_gain':account.final_observations>account.first_observations,
@@ -108,7 +108,7 @@ def comparison_tables(old4,old5,new4,new5,output,oldr,newr):
             ('original_four_positive',['positive_0_20','positive_20_40','positive_40_60','positive_60_100'])]:
             rows=sp[sp.bin_scheme.eq(bins)&sp.quantity_tercile.eq('high')].set_index('support_bin').loc[labels]
             values=rows.observed_yeast_fraction.to_numpy()
-            assessments.append({'configuration':configuration,'filter':'F3','support_bin_scheme':bins,
+            assessments.append({'configuration':configuration,'filter':'F1','support_bin_scheme':bins,
                 'high_tercile_all_positive_bins_evaluable':bool(np.isfinite(values).all()),
                 'high_tercile_positive_bins_nonincreasing':bool(np.all(np.diff(values)<=0)) if np.isfinite(values).all() else pd.NA,
                 'high_tercile_low_and_high_both_have_yeast':bool(rows.yeast.iloc[0]>0 and rows.yeast.iloc[-1]>0),

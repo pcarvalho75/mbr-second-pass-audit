@@ -3,7 +3,8 @@
 Each definition of the Methods (section 2) and of Supplement S2 (Definitions), with the function that implements it.
 Paths are relative to the repository root; line numbers refer to this version. These functions are copied unchanged
 from the code that produced the published numbers (build record: AST identity with the source, see
-docs/REPRODUCTION.md).
+docs/REPRODUCTION.md), except that the filter labels were renamed to match the article (F3->F1, F4->F2, F0->F3;
+nothing else changed; see Filter labels below).
 
 ## Reports and acceptance
 
@@ -11,7 +12,7 @@ docs/REPRODUCTION.md).
 | --- | --- |
 | A report row is a target (Decoy = 0); run names lose their folder, extension and the dataset prefix. | `mbraudit/species.py:accept_rows` (105), `run_name` (31); 250 pg: `mbraudit/pg250/endpoints.py:adapt_reports` (86), `canonical_sample` (50) |
 | Observation: one precursor (modified sequence plus charge) in one cell or run. | `mbraudit/singlecell/reports.py:Reports.load` (61, key = (Modified.Sequence, Precursor.Charge)); `mbraudit/pg250/endpoints.py:memberships` (189) |
-| F0: run precursor q-value at most 0.01. F3: run, global and library precursor q-values all at most 0.01. F4: F3 plus the run, global and library protein-group q-values at most 0.01. Missing fields fail. The same rule is applied to each pass separately. | `mbraudit/filters.py:filter_mask` (12; missing values are filled with 2 before the call, `accounting.py:filtered_pair` 212); 250 pg: `endpoints.py:MASKS` and `adapt_reports` |
+| F1 (primary): run, global and library precursor q-values all at most 0.01. F2: F1 plus the run, global and library protein-group q-values at most 0.01. F3: run precursor q-value at most 0.01. Missing fields fail. The same rule is applied to each pass separately. | `mbraudit/filters.py:filter_mask` (12; missing values are filled with 2 before the call, `accounting.py:filtered_pair` 212); 250 pg: `endpoints.py:MASKS` and `adapt_reports` |
 
 ## Classes (Methods 2.2)
 
@@ -56,9 +57,32 @@ docs/REPRODUCTION.md).
 | Missed two-fold call: absolute log2 fold change below 1; wrong sign: opposite sign to the design; P1 paired retained/final keys; P3 abundance terciles fixed once on the retained/added union from the median log2 final Precursor.Normalised over the twelve runs. | `mbraudit/pg250/posthoc_fc.py:analyse` (37) |
 | Figure 2 coordinates: y = class fold change, x = the P3 abundance divided by log2(10). | `mbraudit/figures/figure2.py:points` |
 
+## Carryover or false matches (Supplement S9, post hoc)
+
+| Definition | Where |
+| --- | --- |
+| Accepted observations of the two reports of the 54-run search under F1 (targets, run, global and library precursor q-values at most 0.01), with the organism call of the fixed species map, classed retained or added per run. | `mbraudit/pg250/carryover.py:accepted` (31), with `filters.py:filter_mask` and `endpoints.py:memberships` |
+| Run order and organism: added yeast and E. coli identifications per human-only run in acquisition order (design column acquisition_id). Intensity: each added wrong-organism ion's Precursor.Quantity over its median Precursor.Quantity in the same-day single-organism runs of its organism (final result), summarised by the median (10 to the median log10 ratio) and the interquartile range of the log10 ratios, with the Pearson correlation of the log10 intensities. Recurrence: the number of human-only runs in which each wrong-organism precursor is added. Blanks: accepted target precursors by organism in each pass, with the calibration failures of the native QA. | `carryover.py:analyse` (51) |
+
 ## Pools of one or four cell lines (Supplement S6)
 
 | Definition | Where |
 | --- | --- |
 | Fixed pool memberships. | `mbraudit/singlecell/design.py` |
 | Ratio of yeast per added observation, mixed over homogeneous pools; count-model interval (Clopper-Pearson on the yeast split) and cell, precursor-block and two-way bootstrap intervals. | `mbraudit/singlecell/composition.py:composition` (43), `rate_ratio_ci` (89); `bootstrap.py:bootstrap` (77, kind 'composition') |
+
+## Filter labels
+
+The filters are numbered in the order the article introduces them. The code that produced the published numbers,
+and outputs written by earlier versions of this repository, used other labels; the masks are the same.
+
+| Label in the article and this version | Label in earlier outputs | Precursor accepted when |
+| --- | --- | --- |
+| F1 (primary) | F3 | run, global and library precursor q-values all at most 0.01 |
+| F2 | F4 | F1 and the run, global and library protein-group q-values at most 0.01 |
+| F3 | F0 | run precursor q-value at most 0.01 |
+
+The renaming also applies to labels built from them: workflow names (all_cells_F3 was all_cells_F0), column names
+(second_pass_only_with_F3_firstpass was second_pass_only_with_F0_firstpass) and the file names of the workflow
+draws. Two tables are sorted by the label and therefore list their rows in a new order with the same content:
+fold-change/fc_summary.tsv and fold-change/t3_summary.tsv.

@@ -10,7 +10,7 @@ LINE = {'Hela': 'HeLa', 'Hep': 'HepG2', 'A549': 'A549', 'H1975': 'H1975'}
 
 
 def pool_membership(reports, comp):
-    """Cells of each pool search, as named in its reports (Supplementary Data D22)."""
+    """Cells of each pool search, as named in its reports (Supplementary Data D6, Block A)."""
     import pandas as pd
     rows = []
     for alias in list(comp.H6_RUNS) + list(comp.M6) + list(comp.H16) + list(comp.M16):

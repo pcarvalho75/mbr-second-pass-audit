@@ -109,18 +109,18 @@ P44|lost kept group via other peptide	P44	34,666	exact
 P44|lost kept group via other peptide, %	P44	83.51	2
 P44|precursors wholly absent	P44	3,085	exact
 P44|human-only protein groups wholly absent	P44	432	exact
-Fig1C|F3|first|all	Figure 1C (Supplementary Data D14)	30.44	2
-Fig1C|F3|first|common	Figure 1C (Supplementary Data D14)	34.92	2
-Fig1C|F3|final|all	Figure 1C (Supplementary Data D14)	46.15	2
-Fig1C|F3|final|common	Figure 1C (Supplementary Data D14)	46.15	2
-Fig1C|F4|first|all	Figure 1C (Supplementary Data D14)	30.78	2
-Fig1C|F4|first|common	Figure 1C (Supplementary Data D14)	35.07	2
-Fig1C|F4|final|all	Figure 1C (Supplementary Data D14)	46.62	2
-Fig1C|F4|final|common	Figure 1C (Supplementary Data D14)	46.63	2
-Fig1C|F0|first|all	Figure 1C (Supplementary Data D14)	23.58	2
-Fig1C|F0|first|common	Figure 1C (Supplementary Data D14)	34.38	2
-Fig1C|F0|final|all	Figure 1C (Supplementary Data D14)	45.42	2
-Fig1C|F0|final|common	Figure 1C (Supplementary Data D14)	45.42	2
+Fig1B|F1|first|all	Figure 1B (Supplementary Data D5)	30.44	2
+Fig1B|F1|first|common	Figure 1B (Supplementary Data D5)	34.92	2
+Fig1B|F1|final|all	Figure 1B (Supplementary Data D5)	46.15	2
+Fig1B|F1|final|common	Figure 1B (Supplementary Data D5)	46.15	2
+Fig1B|F2|first|all	Figure 1B (Supplementary Data D5)	30.78	2
+Fig1B|F2|first|common	Figure 1B (Supplementary Data D5)	35.07	2
+Fig1B|F2|final|all	Figure 1B (Supplementary Data D5)	46.62	2
+Fig1B|F2|final|common	Figure 1B (Supplementary Data D5)	46.63	2
+Fig1B|F3|first|all	Figure 1B (Supplementary Data D5)	23.58	2
+Fig1B|F3|first|common	Figure 1B (Supplementary Data D5)	34.38	2
+Fig1B|F3|final|all	Figure 1B (Supplementary Data D5)	45.42	2
+Fig1B|F3|final|common	Figure 1B (Supplementary Data D5)	45.42	2
 P49|second_pass_only_vs_retained|low95	P49	1.510	3
 P49|second_pass_only_vs_retained|high95	P49	8.669	3
 P49|lost_vs_retained|low95	P49	2.013	3
@@ -307,3 +307,57 @@ P40|designed runs	P40	54	exact
 P40|runs of kind mixture	P40	30	exact
 P40|runs of kind single	P40	18	exact
 P40|runs of kind blank	P40	6	exact
+S9|check|added wrong-organism	Supplement S9 (reproduces Table 3)	220	exact
+S9|check|added species-exclusive	Supplement S9 (reproduces Table 3)	6,708	exact
+S9|check|retained wrong-organism	Supplement S9 (reproduces Table 3)	79	exact
+S9|check|retained species-exclusive	Supplement S9 (reproduces Table 3)	17,602	exact
+S9|run order|12743|Y|added yeast	Supplement S9 (carryover, post hoc)	11	exact
+S9|run order|12743|E|added E. coli	Supplement S9 (carryover, post hoc)	17	exact
+S9|run order|12743|added species-exclusive	Supplement S9 (carryover, post hoc)	1,032	exact
+S9|run order|12743|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	2.71	2
+S9|run order|12744|Y|added yeast	Supplement S9 (carryover, post hoc)	23	exact
+S9|run order|12744|E|added E. coli	Supplement S9 (carryover, post hoc)	28	exact
+S9|run order|12744|added species-exclusive	Supplement S9 (carryover, post hoc)	1,147	exact
+S9|run order|12744|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	4.45	2
+S9|run order|12745|Y|added yeast	Supplement S9 (carryover, post hoc)	19	exact
+S9|run order|12745|E|added E. coli	Supplement S9 (carryover, post hoc)	24	exact
+S9|run order|12745|added species-exclusive	Supplement S9 (carryover, post hoc)	1,172	exact
+S9|run order|12745|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	3.67	2
+S9|run order|12747|Y|added yeast	Supplement S9 (carryover, post hoc)	17	exact
+S9|run order|12747|E|added E. coli	Supplement S9 (carryover, post hoc)	14	exact
+S9|run order|12747|added species-exclusive	Supplement S9 (carryover, post hoc)	1,057	exact
+S9|run order|12747|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	2.93	2
+S9|run order|12748|Y|added yeast	Supplement S9 (carryover, post hoc)	16	exact
+S9|run order|12748|E|added E. coli	Supplement S9 (carryover, post hoc)	14	exact
+S9|run order|12748|added species-exclusive	Supplement S9 (carryover, post hoc)	1,113	exact
+S9|run order|12748|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	2.70	2
+S9|run order|12749|Y|added yeast	Supplement S9 (carryover, post hoc)	13	exact
+S9|run order|12749|E|added E. coli	Supplement S9 (carryover, post hoc)	24	exact
+S9|run order|12749|added species-exclusive	Supplement S9 (carryover, post hoc)	1,187	exact
+S9|run order|12749|added wrong-organism fraction, %	Supplement S9 (carryover, post hoc)	3.12	2
+S9|organism|Y|added yeast	Supplement S9 (carryover, post hoc)	99	exact
+S9|organism|E|added E. coli	Supplement S9 (carryover, post hoc)	121	exact
+S9|intensity|Y|added yeast ions	Supplement S9 (carryover, post hoc)	99	exact
+S9|intensity|Y|added yeast ions accepted in the source runs	Supplement S9 (carryover, post hoc)	88	exact
+S9|intensity|Y|median ratio to the source median	Supplement S9 (carryover, post hoc) (14% and 18%)	0.1410	4
+S9|intensity|Y|interquartile range of log10 ratios	Supplement S9 (carryover, post hoc)	1.32	2
+S9|intensity|Y|Pearson r of log10 intensities	Supplement S9 (carryover, post hoc)	0.06	2
+S9|intensity|E|added E. coli ions	Supplement S9 (carryover, post hoc)	121	exact
+S9|intensity|E|added E. coli ions accepted in the source runs	Supplement S9 (carryover, post hoc)	121	exact
+S9|intensity|E|median ratio to the source median	Supplement S9 (carryover, post hoc) (14% and 18%)	0.1824	4
+S9|intensity|E|interquartile range of log10 ratios	Supplement S9 (carryover, post hoc)	1.06	2
+S9|intensity|E|Pearson r of log10 intensities	Supplement S9 (carryover, post hoc)	0.16	2
+S9|recurrence|distinct wrong-organism precursors	Supplement S9 (carryover, post hoc)	167	exact
+S9|recurrence|added in 1 of the six runs	Supplement S9 (carryover, post hoc)	135	exact
+S9|recurrence|added in 2 of the six runs	Supplement S9 (carryover, post hoc)	20	exact
+S9|recurrence|added in 3 of the six runs	Supplement S9 (carryover, post hoc)	7	exact
+S9|recurrence|added in 4 of the six runs	Supplement S9 (carryover, post hoc)	3	exact
+S9|recurrence|added in 6 of the six runs	Supplement S9 (carryover, post hoc)	2	exact
+S9|recurrence|added in three or more of the six runs	Supplement S9 (carryover, post hoc)	12	exact
+S9|blanks|12740|first accepted target precursors	Supplement S9 (carryover, post hoc)	0	exact
+S9|blanks|12740|first calibration failures	Supplement S9 (carryover, post hoc) (native QA)	4	exact
+S9|blanks|12740|final accepted target precursors	Supplement S9 (carryover, post hoc)	148	exact
+S9|blanks|12740|H|final accepted H	Supplement S9 (carryover, post hoc)	117	exact
+S9|blanks|12740|Y|final accepted Y	Supplement S9 (carryover, post hoc)	14	exact
+S9|blanks|12740|E|final accepted E	Supplement S9 (carryover, post hoc)	12	exact
+S9|blanks|12740|shared|final accepted shared	Supplement S9 (carryover, post hoc)	5	exact

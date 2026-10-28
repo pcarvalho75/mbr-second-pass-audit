@@ -1,10 +1,13 @@
-"""Supplementary Data 1: tables D1 to D11 (one sheet each, with blocks) from the pipeline outputs, at full precision,
-plus extra sheets with the v5.1 tables behind the short Supplement tables S3, S5, S6 and S10.
+"""Supplementary Data 1, the published workbook: a README sheet and tables D1 to D11 (one sheet each, with blocks)
+from the pipeline outputs, each value written with the digits of the published tables (mbraudit.workbook.publish).
+The v5.1 tables behind the short Supplement tables S3, S5, S6 and S10 are written at full precision to a separate
+check workbook.
 
-With --compare REFERENCE.xlsx, every cell of the published workbook is checked against the recomputed table:
-rows are matched on their label columns, numbers must agree within half a unit of the published last digit
-(taken from the cell's number format, or from the printed text), and labels, count pairs and words must agree
-exactly. Writes <output_dir>/supplementary-data.xlsx and, when comparing, supplementary-data-comparison.tsv.
+With --compare REFERENCE.xlsx, every cell of a reference workbook is checked against the recomputed table at full
+precision: rows are matched on their label columns, numbers must agree within half a unit of the reference's last
+digit (taken from the cell's number format, or from the printed text), and labels, count pairs and words must agree
+exactly. Writes <output_dir>/supplementary-data.xlsx, supplement-table-sources.xlsx and, when comparing,
+supplementary-data-comparison.tsv.
 """
 import re
 from decimal import Decimal
@@ -122,32 +125,17 @@ def compare(sheets, reference):
     return report
 
 
-def write(sheets, path):
-    import pandas as pd
-    with pd.ExcelWriter(path, engine='openpyxl') as writer:
-        for name, blocks in sheets.items():
-            if isinstance(blocks, Exception):
-                pd.DataFrame({'not produced': [str(blocks)]}).to_excel(writer, sheet_name=name, index=False)
-                continue
-            row = 0
-            for title, frame in blocks:
-                if title:
-                    pd.DataFrame({title: []}).to_excel(writer, sheet_name=name, index=False, startrow=row)
-                    row += 1
-                frame.to_excel(writer, sheet_name=name, index=False, startrow=row)
-                row += len(frame) + 2
-
-
 def main():
     from pathlib import Path
     args = setup(__doc__, lambda p: p.add_argument('--compare', type=Path, default=None, help='published workbook to check against'))
     import pandas as pd
     from mbraudit import config
-    from mbraudit.workbook import build
+    from mbraudit.workbook import build, publish, write_extra
     root = config.output_root()
     sheets = build(root, REPO / 'design' / 'samples54.tsv')
-    write(sheets, root / 'supplementary-data.xlsx')
-    print('Supplementary Data 1:', root / 'supplementary-data.xlsx', flush=True)
+    cells = publish(sheets, root / 'supplementary-data.xlsx')
+    write_extra(sheets, root / 'supplement-table-sources.xlsx')
+    print('Supplementary Data 1:', root / 'supplementary-data.xlsx', f'({cells} table cells, each displaying its text)', flush=True)
     if args.compare:
         report = pd.DataFrame(compare(sheets, args.compare))
         report.to_csv(root / 'supplementary-data-comparison.tsv', sep='\t', index=False, lineterminator='\n')

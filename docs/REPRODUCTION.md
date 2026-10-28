@@ -10,11 +10,12 @@
    memory; the 54-run fold-change step alone takes about 25 minutes, the restricted-library census about 10 minutes;
    `--skip-predicted-census` uses the released candidate counts instead). The 250 pg steps refuse to write into a
    non-empty output folder, so delete the output folder to rerun them.
-4. The last step, `scripts/verify.py`, compares every number of the article (`references/published-values.tsv`, 308
-   values from the text, Tables 1 to 4, the figure captions and Table S10) with the recomputed value, and writes
-   `verification.tsv`. A value matches when it agrees within half a unit of the last printed digit; counts must agree
-   exactly. `python scripts/supplementary_data.py --compare supplementary-data-v6.xlsx` checks the published
-   Supplementary Data workbook cell by cell.
+4. The last step, `scripts/verify.py`, compares every number of the article (`references/published-values.tsv`, 362
+   values: 308 from the text, Tables 1 to 4, the figure captions and Table S10, and 54 of the post hoc carryover check
+   of Supplement S9) with the recomputed value, and writes `verification.tsv`. A value matches when it agrees within
+   half a unit of the last printed digit; counts must agree exactly. `scripts/supplementary_data.py` writes the
+   published Supplementary Data workbook itself; with `--compare WORKBOOK.xlsx` it checks a reference workbook cell by
+   cell.
 
 Each step writes `step.json` with the SHA256 of every input it read. The random draws are fixed (seed 20261018,
 2,000 draws), so a rerun gives the same intervals.
@@ -30,11 +31,12 @@ Run on the archived inputs on 28 October 2026 (Windows 11, Python 3.12.10, the v
 | Check | Result |
 | --- | --- |
 | Numbers of the text, Tables 1 to 4, figure captions and Table S10 | 308 of 308 match |
-| Supplementary Data workbook, 11 sheets | 4,864 of 4,864 compared cells match (the interpretive text columns of D9 and the source-line columns of D9 and D11 are not computed) |
+| Carryover check of Supplement S9 (post hoc) | 54 of 54 match |
+| Supplementary Data workbook, 11 sheets | Written by `scripts/supplementary_data.py`; against the recomputed tables, 10,730 of 10,730 compared cells match (all blocks, including the frozen readings and source lines of D9 and D11); against the earlier published workbook, every cell value is equal; 330 integral counts once shown as 292194.0 are now shown as 292194, the filter rows of D9 and D11 are listed in the order F1, F2, F3, and the README sentence on how the values are produced and the label of the D11 sensitivity block were reworded |
 | Intermediate outputs of the original analysis | 350 saved output files compared: 269 byte for byte, 74 identical after line endings, 3 identical after renaming the study labels, 4 with the intended difference listed below |
-| Figures | Every plotted value of Figure 1 equals the published figure data; the 2,775 dots of Figure 2 are identical, and its counts, missed-call fractions and medians are among the values checked by `verify.py` |
+| Figures | Every plotted value of Figure 1 equals the published figure data; the 2,775 dots of Figure 2 are identical, and its counts, missed-call fractions and medians are among the values checked by `verify.py`; Figures S1 and S3 are pixel-identical to the published files and Figure S2 differs only in the filter label of its two panel titles |
 | Library census | The census of the original predicted library (r = 374,286 / 1,365,729) is identical to the original one |
-| Scientific functions | Copied unchanged from the code that produced the published outputs; identity of the syntax trees is recorded for every function (246 definitions) |
+| Scientific functions | Copied unchanged from the code that produced the published outputs, except that the filter labels were renamed to match the article (F3->F1, F4->F2, F0->F3; nothing else changed); identity of the syntax trees was recorded for every function (246 definitions) before the renaming, and every output of a full run after the renaming equals that of the run before it, after the same renaming |
 
 ### What is not recomputed from the reports
 
@@ -54,3 +56,7 @@ Run on the archived inputs on 28 October 2026 (Windows 11, Python 3.12.10, the v
   each configuration's own ratio and is unchanged.
 - Input, output and configuration handling, the study labels of the post hoc outputs (`jan16`, `jan09`) and two
   display strings of the within-organism analysis were rewritten; no calculation changed.
+- The filters are labelled as in the article (F1 primary, F2, F3; docs/METHODS-IN-CODE.md lists the earlier labels),
+  the panels of Figure 1 follow the text (completeness B, class-relative fractions C) and the Supplementary Data
+  sheets are numbered in the order the Supplement first cites them. Two tables sorted by the label list their rows in
+  a new order (`fc_summary.tsv`, `t3_summary.tsv`); no number changed.

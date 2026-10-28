@@ -1,6 +1,6 @@
 """Single-cell dataset: species census of the restricted predicted library, the search space of the original and
 refinement-off searches. Gives r = yeast-only / human-only precursor candidates under the one-way rule (Methods
-2.3; Table 2 caption, r = 0.2741) and the peptide-unit census (Supplementary Data D3, D4).
+2.3; Table 2 caption, r = 0.2741) and the peptide-unit census (the precursor rows are Supplementary Data D1).
 Decodes the 424 MB binary library and labels about 1.7 million precursors; expect 10 to 20 minutes.
 Outputs: <output_dir>/single-cell/predicted-census.tsv.
 """

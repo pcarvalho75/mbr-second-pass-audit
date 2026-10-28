@@ -16,7 +16,7 @@ KEY = ['Modified.Sequence', 'Precursor.Charge']
 EVENT = ['sample'] + KEY
 
 
-MASKS = {'F0': ['Q.Value'], 'F3': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value'], 'F4': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value', 'PG.Q.Value', 'Global.PG.Q.Value', 'Lib.PG.Q.Value']}
+MASKS = {'F3': ['Q.Value'], 'F1': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value'], 'F2': ['Q.Value', 'Global.Q.Value', 'Lib.Q.Value', 'PG.Q.Value', 'Global.PG.Q.Value', 'Lib.PG.Q.Value']}
 
 
 SPECIES = ['H', 'Y', 'E', 'shared', 'shared_IL', 'unknown', 'quarantined']
@@ -281,7 +281,7 @@ def planned_cells(design, available, summary):
                 ok = bool(av[endpoint + '_available']) and (not cls.startswith('L_') or bool(av.loss_library_split_available))
                 for scope_name, group in scopes:
                     key = (endpoint, mask, cls, tercile, bin_name, scope_name, group)
-                    rows.append({'endpoint': endpoint, 'mask': mask, 'class': cls, 'tercile': tercile, 'support_bin': bin_name, 'scope': scope_name, 'group': group, 'available': ok, 'endpoint_id': seen.get(key, pd.NA), 'status': 'available' if ok else 'unavailable_required_stage_q_field_or_empirical', 'display': 'primary' if mask == 'F3' and (endpoint == 'T1' or tercile == 'high') else 'sensitivity'})
+                    rows.append({'endpoint': endpoint, 'mask': mask, 'class': cls, 'tercile': tercile, 'support_bin': bin_name, 'scope': scope_name, 'group': group, 'available': ok, 'endpoint_id': seen.get(key, pd.NA), 'status': 'available' if ok else 'unavailable_required_stage_q_field_or_empirical', 'display': 'primary' if mask == 'F1' and (endpoint == 'T1' or tercile == 'high') else 'sensitivity'})
     return pd.DataFrame(rows)
 
 
@@ -293,7 +293,7 @@ def interpretation_labels(out):
     finite = np.isfinite(frame.low95) & np.isfinite(frame.high95)
     frame['interpretation_available'] = finite
     frame['interpretation_status'] = np.where(finite, 'finite_population_conditional_interval', 'unavailable_or_infinite_interval')
-    primary = frame['mask'].eq('F3') & frame['scheme'].eq('two_way') & (frame.endpoint.eq('T1') | frame.tercile.eq('high'))
+    primary = frame['mask'].eq('F1') & frame['scheme'].eq('two_way') & (frame.endpoint.eq('T1') | frame.tercile.eq('high'))
     frame['display'] = np.where(primary, 'primary_interval', 'sensitivity_interval')
     table(out / 'contrast_interpretation.tsv', frame)
 

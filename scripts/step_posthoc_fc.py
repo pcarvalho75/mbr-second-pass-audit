@@ -1,4 +1,4 @@
-"""The 250 pg dataset, post hoc fold-change analyses (Results 3.5; Table S11; Supplementary Data D34):
+"""The 250 pg dataset, post hoc fold-change analyses (Results 3.5; Table S11; Supplementary Data D11):
 P1 paired retained/final keys, P2 call consequences per class (missed two-fold, wrong sign, within 0.5),
 P3 abundance terciles fixed on the retained/added union (16 January only).
 Needs step_pg250.py for both studies. Outputs: <output_dir>/pg250/posthoc-fc.
