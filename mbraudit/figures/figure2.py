@@ -1,117 +1,146 @@
-"""Figure 2: fold changes of retained and added peptide ions against their intensity (16 January mixtures).
+"""Figure 2: wrong-organism identifications by observation class in the 250 pg dataset.
 
-points() is a plain function of the fold-change table and the accepted events:
-- y is each eligible ion's class fold change (fc_precursors.tsv, F1, Precursor.Normalised, contexts R and T):
-  median log2 quantity in 5H4Y1E minus median log2 quantity in 5H1Y4E, with at least two positive
-  quantities in each mixture (computed upstream by fold_change.fc);
-- x is the median log2 of the ion's positive, finite final-result Precursor.Normalised over the twelve
-  5H4Y1E and 5H1Y4E runs (F1 accepted events), divided by log2(10). This is the abundance that
-  posthoc_fc.analyse uses for its P3 terciles, so an ion has the same x in both panels.
-Numbers are parsed with Python float() from text, as the post hoc analysis does, so values agree to the last bit.
-draw() renders the two panels with 0.3-log10 binned medians (bins with at least 10 ions).
+panel_data() collects every plotted value from the pipeline outputs through the functions that define them
+(tables.wrong_organism and tables.human_only_passes); nothing is estimated here.
+- Panel A, all 54 runs analysed together (F1): the observed wrong-organism fraction A/n of retained, added and lost
+  observations in the human-only, yeast-only and E. coli-only runs, with the two-way 95% percentile interval
+  (endpoint_counts.tsv and fraction_intervals.tsv of the 54-run analysis, T1, organism scope).
+- Panel B, the six human-only runs: the same fraction for the first pass (retained plus lost), the retained, added
+  and lost classes and the final result (retained plus added), analysed with the other 48 runs and on their own
+  (endpoint_counts.tsv of the 54-run and of the within-human analyses).
+Values are plotted as percentages (100 times the fraction). The full rows, with the pooled rows of panel A, are
+Table D12 of Supplementary Data 1 (Tables 3 and 4 of the earlier manuscript).
+draw() renders the figure at two-column width (7.2 in). It uses the font of Figure 1 and the type sizes Figure 1
+has when printed at the same width (Figure 1 is drawn 11.945 in wide, so each of its sizes is scaled by
+7.2 / 11.945), and the class colours of Figure 1.
 """
-import math
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
-QUANTITY = 'Precursor.Normalised'
-COLORS = {'Y': '#E69F00', 'E': '#CC79A7'}
-TITLES = {'R': 'retained', 'T': 'added'}
-PANELS = {'R': 'A', 'T': 'B'}
-BIN_WIDTH = .3
-MIN_BIN_N = 10
+from mbraudit import tables
+
+COLORS = {'Retained': '#0072B2', 'Added': '#009E73', 'Lost': '#D55E00'}  # the class colours of Figure 1
+INK, LINK, REFERENCE = '#333333', '#BBBBBB', '#777777'
+ORGANISMS = {'Human': 'Human-only runs', 'Yeast': 'Yeast-only runs', 'E. coli': r'$\mathit{E.\:coli}$-only runs'}
+CLASSES_A = ['Retained', 'Added', 'Lost']
+CLASSES_B = ['First pass', 'Retained', 'Added', 'Lost', 'Final result']
+LABELS_B = {'First pass': 'First\npass', 'Final result': 'Final\nresult'}  # two lines, so that labels do not touch
+ANALYSES_B = {'with': 'With the other 48 runs', 'alone': 'On their own'}
+TICKS_A = [0.2, 0.5, 1, 2, 5, 10, 20, 50]
+TICKS_B = [0.3, 0.5, 1, 2, 5]
+WIDTH, HEIGHT = 7.2, 3.2  # inches
+SCALE = WIDTH / 11.945  # Figure 1 page width, inches
+# Figure 1 type sizes in points: panel titles 15, axis labels and value ticks 13, category labels 12, legends 11.5;
+# its interval lines are 1.8 points wide. Markers are 4.5 points across.
+TITLE, LABEL, TICK, CATEGORY, LEGEND = (15 * SCALE, 13 * SCALE, 13 * SCALE, 12 * SCALE, 11.5 * SCALE)
+MARKER, LINE = 4.5, 1.8 * SCALE
 
 
-def _text(path, usecols=None):
-    return pd.read_csv(path, sep='\t', dtype=str, keep_default_na=False, usecols=usecols)
-
-
-def points(fc_path, keys_path, events_path, samples_path):
-    fc = _text(fc_path)
-    fc = fc[(fc['mask'] == 'F1') & (fc.quantity == QUANTITY) & fc.context.isin(['R', 'T']) & (fc.eligible == 'True')].copy()
-    fc['key'] = fc.key.map(float).astype(int)
-    fc['observed_log2fc'] = fc.observed_log2fc.map(float)
-    keys = _text(keys_path)
-    keys['key'] = keys.key.map(float).astype(int)
-    samples = _text(samples_path)
-    axis = samples[(samples.kind == 'mixture') & samples['group'].isin(['5H4Y1E', '5H1Y4E'])]
-    events = _text(events_path, usecols=['sample', 'Modified.Sequence', 'Precursor.Charge', 'species', 'mask', 'stage', QUANTITY])
-    events = events[(events.stage == 'final') & (events['mask'] == 'F1') & events['sample'].isin(axis['sample'])].copy()
-    events[QUANTITY] = events[QUANTITY].map(lambda x: np.nan if x == 'NA' else float(x))
-    events = events[events[QUANTITY].gt(0) & np.isfinite(events[QUANTITY])]
-    events = events.merge(keys[['key', 'Modified.Sequence', 'Precursor.Charge']], on=['Modified.Sequence', 'Precursor.Charge'], how='left', validate='many_to_one')
-    events['log_abundance'] = np.log2(events[QUANTITY])
-    abundance = events.groupby(['species', 'key']).log_abundance.median().rename('abundance_log2').reset_index()
-    frame = fc.merge(abundance, on=['species', 'key'], how='left', validate='many_to_one')
-    if frame.abundance_log2.isna().any():
-        raise ValueError('An eligible ion has no positive final quantity in the twelve runs')
-    frame['log10_intensity'] = frame.abundance_log2 / np.log2(10.)
-    frame = frame.merge(keys[['key', 'Modified.Sequence', 'Precursor.Charge']], on='key', how='left', validate='many_to_one')
-    columns = ['species', 'context', 'key', 'Modified.Sequence', 'Precursor.Charge', 'n_high', 'n_low', 'observed_log2fc', 'abundance_log2', 'log10_intensity']
-    return frame[columns].sort_values(['context', 'species', 'key']).reset_index(drop=True)
-
-
-def binned_medians(x, y, edges):
-    bins = np.digitize(x, edges) - 1
+def panel_data(primary_export, within_human):
+    """Every plotted value of Figure 2 as rows (panel, x label, class, analysis, A, P, n, percent and interval)."""
     rows = []
-    for i in range(len(edges) - 1):
-        take = bins == i
-        n = int(take.sum())
-        valid = n >= MIN_BIN_N
-        rows.append({'left': float(edges[i]), 'right': float(edges[i + 1]), 'n': n, 'shown': valid,
-                     'x_median': float(np.median(x[take])) if valid else float((edges[i] + edges[i + 1]) / 2),
-                     'y_median': float(np.median(y[take])) if valid else np.nan})
-    return rows
+    for r in tables.wrong_organism(primary_export):
+        if r['organism'] not in ORGANISMS:
+            continue  # pooled rows are in Table D12 only
+        rows.append({'panel': 'A', 'x': r['organism'] + '-only runs', 'class': r['class'], 'analysis': 'all 54 runs',
+                     'A': r['A'], 'P': r['P'], 'n': r['n'], 'percent': 100 * r['fraction'],
+                     'low95_percent': 100 * r['low95'], 'high95_percent': 100 * r['high95']})
+    passes, _ = tables.human_only_passes(primary_export, within_human)
+    passes = {r['class']: r for r in passes}
+    for cls in CLASSES_B:
+        r = passes[cls]
+        for key, analysis in ANALYSES_B.items():
+            rows.append({'panel': 'B', 'x': cls, 'class': cls, 'analysis': analysis.lower(), 'A': r[key + '_A'],
+                         'P': r[key + '_P'], 'n': r[key + '_n'], 'percent': r[key + '_percent'],
+                         'low95_percent': float('nan'), 'high95_percent': float('nan')})
+    frame = pd.DataFrame(rows)
+    if frame.duplicated(['panel', 'x', 'class', 'analysis']).any() or len(frame) != 19:
+        raise ValueError('Figure 2 needs 9 panel A points and 10 panel B points')
+    return frame
+
+
+def write_data(frame, path):
+    """The plotted values as text with every digit (repr of the float)."""
+    out = frame.copy()
+    for column in ['percent', 'low95_percent', 'high95_percent']:
+        out[column] = [repr(float(v)) if v == v else 'NA' for v in out[column]]
+    out.to_csv(path, sep='\t', index=False, lineterminator='\n')
+
+
+def _percent(value, _position=None):
+    return f'{value:g}%'
+
+
+def _log_axis(ax, ticks):
+    from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
+    ax.set_yscale('log')
+    ax.set_ylim(ticks[0], ticks[-1])
+    ax.yaxis.set_major_locator(FixedLocator(ticks))
+    ax.yaxis.set_major_formatter(FuncFormatter(_percent))
+    ax.yaxis.set_minor_locator(NullLocator())
+    ax.axhline(1, color=REFERENCE, linestyle='--', linewidth=.8, zorder=0, gid='one-percent-line')
+    ax.set_ylabel('Wrong-organism identifications')
 
 
 def draw(frame, output, name='figure2'):
+    """Render Figure 2 (PDF, SVG, 300 dpi PNG and LZW TIFF) from panel_data()."""
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    from matplotlib.ticker import MultipleLocator
+    from matplotlib.transforms import blended_transform_factory
     from PIL import Image
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 7.5, 'axes.labelsize': 8, 'axes.titlesize': 9,
-                         'xtick.labelsize': 7.2, 'ytick.labelsize': 7.2, 'axes.spines.top': False, 'axes.spines.right': False,
-                         'axes.linewidth': .6, 'svg.fonttype': 'none', 'pdf.fonttype': 42, 'svg.hashsalt': 'fold-change-dotplot'})
-    fig, axes = plt.subplots(1, 2, figsize=(174 / 25.4, 80 / 25.4), sharex=True, sharey=True)
-    fig.subplots_adjust(left=.095, right=.99, bottom=.19, top=.86, wspace=.12)
-    xlo, xhi = frame.log10_intensity.min() - .08, frame.log10_intensity.max() + .08
-    ylo = math.floor((min(frame.observed_log2fc.min(), -2) - .2) * 2) / 2
-    yhi = math.ceil((max(frame.observed_log2fc.max(), 2) + .2) * 2) / 2
-    edges = np.arange(math.floor(xlo / BIN_WIDTH) * BIN_WIDTH, math.ceil(xhi / BIN_WIDTH) * BIN_WIDTH + BIN_WIDTH / 2, BIN_WIDTH)
-    trends = []
-    for ax, ctx in zip(axes, ['R', 'T']):
-        for yy, color in [(2, COLORS['Y']), (0, '#A8ADB3'), (-2, COLORS['E'])]:
-            ax.axhline(yy, color=color, lw=.7, ls=(0, (4, 3)), alpha=.85, zorder=0)
-        for sp in ['Y', 'E']:
-            p = frame[(frame.context == ctx) & (frame.species == sp)]
-            x = p.log10_intensity.to_numpy(float)
-            y = p.observed_log2fc.to_numpy(float)
-            ax.scatter(x, y, s=5, alpha=.36, color=COLORS[sp], edgecolors='none', rasterized=False, zorder=2)
-            rows = binned_medians(x, y, edges)
-            trends.extend({'context': ctx, 'species': sp, **r} for r in rows)
-            ax.plot([r['x_median'] for r in rows], [r['y_median'] for r in rows], color=COLORS[sp], lw=1.05, zorder=3)
-        ax.set_title(TITLES[ctx], pad=8)
-        ax.text(-.02, 1.035, PANELS[ctx], transform=ax.transAxes, ha='right', va='bottom', fontsize=10, fontweight='bold')
-        if ctx == 'R':
-            ax.text(xlo + .06, yhi - .75, 'yeast', color=COLORS['Y'], fontsize=8, fontweight='bold', ha='left', va='center')
-            ax.text(xlo + .06, ylo + .65, 'E. coli', color=COLORS['E'], fontsize=8, fontweight='bold', fontstyle='italic', ha='left', va='center')
-        ax.set_xlim(xlo, xhi)
-        ax.set_ylim(ylo, yhi)
-        ax.xaxis.set_major_locator(MultipleLocator(.5))
-        ax.yaxis.set_major_locator(MultipleLocator(2))
-        ax.tick_params(width=.6, length=3, pad=3)
-    fig.supxlabel('log10 intensity', fontsize=8, y=.035)
-    fig.supylabel('log2 fold change', fontsize=8, x=.017)
-    fig.savefig(output / (name + '.pdf'), metadata={'Creator': None, 'Producer': None, 'CreationDate': None, 'ModDate': None})
-    fig.savefig(output / (name + '.svg'), metadata={'Date': None, 'Creator': None})
-    fig.savefig(output / (name + '.png'), dpi=600)
-    plt.close(fig)
+    style = {'font.family': 'DejaVu Sans', 'font.size': TICK, 'axes.titlesize': TITLE, 'axes.labelsize': LABEL,
+             'xtick.labelsize': CATEGORY, 'ytick.labelsize': TICK, 'legend.fontsize': LEGEND, 'axes.linewidth': .6,
+             'xtick.major.width': .6, 'ytick.major.width': .6, 'xtick.major.size': 3, 'ytick.major.size': 3,
+             'axes.spines.top': False, 'axes.spines.right': False, 'mathtext.fontset': 'dejavusans',
+             'svg.fonttype': 'none', 'pdf.fonttype': 42, 'svg.hashsalt': 'figure2-250pg'}
+    with plt.rc_context(style):
+        fig, (a, b) = plt.subplots(1, 2, figsize=(WIDTH, HEIGHT), gridspec_kw={'width_ratios': [1.25, 1]})
+        fig.subplots_adjust(left=.085, right=.99, bottom=.135, top=.91, wspace=.3)
+        panel = frame[frame.panel == 'A']
+        for i, organism in enumerate(ORGANISMS):
+            for j, cls in enumerate(CLASSES_A):
+                r = panel[(panel.x == organism + '-only runs') & (panel['class'] == cls)].iloc[0]
+                y, lo, hi = float(r.percent), float(r.low95_percent), float(r.high95_percent)
+                bars = a.errorbar(i + (j - 1) * .22, y, yerr=[[y - lo], [hi - y]], fmt='o', color=COLORS[cls], markersize=MARKER,
+                                  elinewidth=LINE, capsize=2.2, capthick=LINE, label=cls if i == 0 else None)
+                tag = f"panelA-{organism.replace('. ', '')}-{cls}"  # SVG ids, to read the drawn values back
+                bars.lines[0].set_gid(tag + '-point')
+                for cap, end in zip(bars.lines[1], ['low', 'high']):
+                    cap.set_gid(f'{tag}-{end}')
+                bars.lines[2][0].set_gid(tag + '-interval')
+        _log_axis(a, TICKS_A)
+        a.text(1, 1, '1%', transform=blended_transform_factory(a.transAxes, a.transData), ha='right', va='bottom',
+               color=REFERENCE, fontsize=CATEGORY)
+        a.set_xlim(-.5, len(ORGANISMS) - .5)
+        a.set_xticks(range(len(ORGANISMS)), list(ORGANISMS.values()))
+        a.set_title('A  All 54 runs analysed together', loc='left')
+        a.legend(frameon=False, loc='upper left', handletextpad=.3, borderaxespad=.2)
+        panel = frame[frame.panel == 'B']
+        xs = range(len(CLASSES_B))
+        values = {key: [float(panel[(panel.x == cls) & (panel.analysis == analysis.lower())].iloc[0].percent) for cls in CLASSES_B]
+                  for key, analysis in ANALYSES_B.items()}
+        for x, w, o in zip(xs, values['with'], values['alone']):
+            b.plot([x, x], [w, o], color=LINK, linewidth=2 * LINE * .65, solid_capstyle='butt', zorder=1)
+        size = (MARKER * 1.1) ** 2
+        b.scatter(xs, values['with'], s=size, color=INK, linewidths=.8, zorder=2, label=ANALYSES_B['with'], gid='panelB-with')
+        b.scatter(xs, values['alone'], s=size, facecolor='white', edgecolor=INK, linewidths=.8, zorder=2,
+                  label=ANALYSES_B['alone'], gid='panelB-alone')
+        _log_axis(b, TICKS_B)
+        b.set_xlim(-.5, len(CLASSES_B) - .5)
+        b.set_xticks(list(xs), [LABELS_B.get(cls, cls) for cls in CLASSES_B])
+        b.set_title('B  Human-only runs', loc='left')
+        b.legend(frameon=False, loc='upper left', handletextpad=.3, borderaxespad=.2)
+        metadata = {'Creator': None, 'Producer': None, 'CreationDate': None, 'ModDate': None}
+        fig.savefig(output / (name + '.pdf'), metadata=metadata)
+        fig.savefig(output / (name + '.svg'), metadata={'Date': None, 'Creator': None})
+        fig.savefig(output / (name + '.png'), dpi=300)
+        plt.close(fig)
+    svg = output / (name + '.svg')
+    svg.write_bytes(svg.read_bytes().replace(b'\r\n', b'\n'))
     with Image.open(output / (name + '.png')) as image:
-        image.convert('RGB').save(output / (name + '.tiff'), compression='tiff_lzw', dpi=(600, 600))
-    pd.DataFrame(trends).to_csv(output / (name + '-binned-medians.tsv'), sep='\t', index=False, lineterminator='\n', na_rep='NA')
-    return trends
+        image.convert('RGB').save(output / (name + '.tiff'), compression='tiff_lzw', dpi=(300, 300))
+    return [output / (name + suffix) for suffix in ['.pdf', '.svg', '.png', '.tiff']]

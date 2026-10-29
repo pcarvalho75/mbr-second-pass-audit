@@ -75,11 +75,11 @@ def compute(root, candidate_counts):
     add('P70|single-cell support ratio', float(row.fraction_ratio), 'support_contrasts.tsv')
     add('P70|single-cell support counts', f'{int(row.numerator_yeast)}/{int(row.numerator_n)} vs {int(row.reference_yeast)}/{int(row.reference_n)}', 'support_contrasts.tsv')
 
-    # The 250 pg dataset.
+    # The 250 pg dataset. Figure 2 and Table D12 (Blocks A and B were Tables 3 and 4 of the earlier manuscript).
     export = pg / 'primary' / 'export'
-    for r in tables.table3(export):
+    for r in tables.wrong_organism(export):
         for field in ['A', 'P', 'n', 'fraction', 'low95', 'high95']:
-            add(f"T3|{r['organism']}|{r['class']}|{field}", r[field], 'pg250/primary/export')
+            add(f"D12A|{r['organism']}|{r['class']}|{field}", r[field], 'pg250/primary/export')
     counts = _read(export / 'endpoint_counts.tsv', keep_default_na=False)
     design = pd.read_csv(Path(__file__).resolve().parents[1] / 'design' / 'samples54.tsv', sep='\t', keep_default_na=False)
     human_runs = design[(design.kind == 'single') & (design.present_species == 'H')]['sample']
@@ -89,10 +89,10 @@ def compute(root, candidate_counts):
     add('P53|per-run added fraction min, %', 100 * added.min(), 'endpoint_counts.tsv run scope')
     add('P53|per-run added fraction max, %', 100 * added.max(), 'endpoint_counts.tsv run scope')
     add('P53|added above retained in every human-only run', bool((added > kept.reindex(added.index)).all()), 'endpoint_counts.tsv run scope')
-    t4, comparison = tables.table4(export, pg / 'within-H')
-    for r in t4:
+    passes, comparison = tables.human_only_passes(export, pg / 'within-H')
+    for r in passes:
         for field in ['with_A', 'with_n', 'with_percent', 'alone_A', 'alone_n', 'alone_percent', 'with_P', 'alone_P']:
-            add(f"T4|{r['class']}|{field}", r[field], 'accepted_passes / endpoint_counts')
+            add(f"D12B|{r['class']}|{field}", r[field], 'accepted_passes / endpoint_counts')
     add('P56|fewer wrong-organism additions alone, %', float(comparison['wrong_added_count_reduction_percent']), 'added_count_comparison')
     from mbraudit.pg250.summary import accepted_passes
     rows = [dict(r) for r in counts.astype(str).to_dict('records')]
@@ -120,7 +120,7 @@ def compute(root, candidate_counts):
     add('P56|human final wrong-organism fraction, at least 5 of 6, %', 100 * float(row.false_fraction), 't3_summary.tsv')
     row = _one(cov3, mask='F1', organism='H', scheme='stage_specific', stage='final', threshold=5, transition='F')
     add('P56|human identifications kept, at least 5 of 6, %', 100 * float(row.present_event_coverage), 't3_coverage.tsv')
-    # Fold changes (Results 3.5, Figure 2).
+    # Fold changes (Results 3.5, Figure 3).
     post = _read(pg / 'posthoc-fc' / 'summary.tsv', keep_default_na=False)
     base = post[(post.batch == 'jan16') & (post['mask'] == 'F1') & (post.quantity == 'Precursor.Normalised')]
     for sp in ['Y', 'E']:
@@ -147,14 +147,14 @@ def compute(root, candidate_counts):
             better += int(float(t.MAE) < float(r.MAE))
             add(f'P62|{tag}|{sp}|R_T intersection keys', int(r.eligible_keys), 'fc_summary.tsv')
         add(f'P62|{tag}|added MAE smaller on R/T intersection (of 2)', better, 'fc_summary.tsv')
-    fig2 = root / 'figures' / 'figure2-points.tsv'
-    if fig2.exists():
-        f2 = _read(fig2)
+    fig3 = root / 'figures' / 'figure3-points.tsv'
+    if fig3.exists():
+        f3 = _read(fig3)
         for sp in ['Y', 'E']:
             for ctx in ['R', 'T']:
-                add(f'Fig2|{sp}|{ctx}|ions', int(((f2.species == sp) & (f2.context == ctx)).sum()), 'figure2-points.tsv')
-            shared = set(f2[(f2.species == sp) & (f2.context == 'R')].key) & set(f2[(f2.species == sp) & (f2.context == 'T')].key)
-            add(f'Fig2|{sp}|ions in both panels', len(shared), 'figure2-points.tsv')
+                add(f'Fig3|{sp}|{ctx}|ions', int(((f3.species == sp) & (f3.context == ctx)).sum()), 'figure3-points.tsv')
+            shared = set(f3[(f3.species == sp) & (f3.context == 'R')].key) & set(f3[(f3.species == sp) & (f3.context == 'T')].key)
+            add(f'Fig3|{sp}|ions in both panels', len(shared), 'figure3-points.tsv')
     qa = pg / 'native-qa' / 'native-run-qa.tsv'
     if qa.exists():
         q = _read(qa, keep_default_na=False)

@@ -60,7 +60,7 @@ class Arithmetic(unittest.TestCase):
         self.assertEqual((result['yeast'], result['denominator']), (382, 346440))
         self.assertEqual((result['lower_percent'], result['estimated_upper_percent']), ('0.110', '0.513'))
 
-    def test_table4_sums_counts_rather_than_averaging_fractions(self):
+    def test_figure2b_whole_passes_sum_counts_rather_than_averaging_fractions(self):
         def rows(values):
             return [{'endpoint': 'T1', 'mask': 'F1', 'scope': 'organism', 'group': 'H', 'tercile': 'all',
                      'class': cls, 'A': str(a), 'P': str(p)} for cls, a, p in values]

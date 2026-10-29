@@ -1,5 +1,5 @@
 """The 250 pg dataset, post hoc: one organism's six single-organism runs analysed on their own, without the
-mixtures (Results 3.4; Table 4; Table S9, D9). Same three-organism database and settings as the 54-run analysis.
+mixtures (Results 3.4; Figure 2B; Tables S9, D9, D12). Same three-organism database and settings as the 54-run analysis.
 Outputs: <output_dir>/pg250/within-<organism>.
 """
 from _setup import setup, note

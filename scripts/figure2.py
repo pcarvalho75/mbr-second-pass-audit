@@ -1,6 +1,9 @@
-"""Figure 2: fold changes of retained (A) and added (B) yeast and E. coli peptide ions between the 5H4Y1E and
-5H1Y4E mixtures (16 January, six runs each) against their intensity, with 0.3-log10 binned medians.
-Needs step_pg250.py --study primary. Outputs: <output_dir>/figures/figure2.* and figure2-points.tsv (every dot).
+"""Figure 2: wrong-organism identifications by observation class in the 250 pg dataset. (A) Retained, added and
+lost observations of the human-only, yeast-only and E. coli-only runs, all 54 runs analysed together, with two-way
+95% intervals. (B) The six human-only runs analysed with the other 48 runs and on their own: first pass, retained,
+added, lost and final result.
+Needs step_pg250.py --study primary and step_within_organism.py --organism H.
+Outputs: <output_dir>/figures/figure2.{pdf,svg,png,tiff} and figure2-data.tsv (every plotted value with its A, P and n).
 """
 from _setup import setup
 
@@ -9,13 +12,12 @@ def main():
     setup(__doc__)
     from mbraudit import config
     from mbraudit.figures import figure2
-    root = config.output_root() / 'pg250' / 'primary'
+    root = config.output_root() / 'pg250'
     out = config.output_dir('figures')
-    frame = figure2.points(root / 'fold-change' / 'fc_precursors.tsv', root / 'fold-change' / 'keys.tsv',
-                           root / 'export' / 'accepted_events.tsv', config.resolve(config.value('pg250.primary.design')))
-    frame.to_csv(out / 'figure2-points.tsv', sep='\t', index=False, float_format='%.17g', lineterminator='\n')
+    frame = figure2.panel_data(root / 'primary' / 'export', root / 'within-H')
+    figure2.write_data(frame, out / 'figure2-data.tsv')
     figure2.draw(frame, out)
-    print('Figure 2:', len(frame), 'ions;', out, flush=True)
+    print('Figure 2:', len(frame), 'plotted values;', out, flush=True)
 
 
 if __name__ == '__main__':

@@ -37,7 +37,8 @@ nothing else changed; see Filter labels below).
 | 250 pg: A counts identifications exclusive to an organism absent from the run, P those exclusive to the intended organism, fraction A/n with n = A + P; shared, I/L-shared, unknown and quarantined excluded. Organism calls come from the fixed species map of the three-organism predicted library (symmetric exact and I/L checks). | `mbraudit/pg250/endpoints.py:endpoint_summary` (270); species map: `library/opportunity_audit.py:audit`, `primary_label` (100) |
 | 250 pg intervals: two-way run (stratified by organism, six runs each) and precursor resampling, 2,000 shared draws; contrasts (added/retained, lost/retained, high/low support) from the same draws. | `endpoints.py:bootstrap` (327), `contrasts` (363) |
 | Within-organism co-searches: the same rules with six runs and one stratum. | `mbraudit/pg250/within_organism.py:memberships` (103), `endpoint_summary` (113), `bootstrap` (123) |
-| Whole passes of the human-only runs (Table 4): first pass = R + L counts, final = R + T counts. | `mbraudit/pg250/summary.py:accepted_passes` (7), `added_count_comparison` (33) |
+| Whole passes of the human-only runs (Figure 2B, Table D12): first pass = R + L counts, final = R + T counts. | `mbraudit/pg250/summary.py:accepted_passes` (7), `added_count_comparison` (33) |
+| Figure 2 values: A/n of each class of the single-organism runs with its two-way interval (panel A), and of the human-only runs' whole passes and classes with the other 48 runs and on their own (panel B), plotted as percentages. | `mbraudit/tables.py:wrong_organism`, `human_only_passes`; `mbraudit/figures/figure2.py:panel_data` |
 
 ## Support and quantity terciles (Supplement S2, S3)
 
@@ -55,7 +56,7 @@ nothing else changed; see Filter labels below).
 | Completeness filter: keep a precursor present (positive quantity) in at least 3 or 5 of an organism's six runs; fractions and kept shares (Table S8). | `mbraudit/pg250/fold_change.py:t3` (85) |
 | Fold change of a peptide ion: median log2 quantity in the six 5H4Y1E runs minus that in the six 5H1Y4E runs, with at least two positive quantities in each; expected +2 for yeast, -2 for E. coli; contexts first pass (D), final (F), retained (R), added (T). | `fold_change.py:fc` (193); 9 January batch: `fold_change_replication.py:fc` |
 | Missed two-fold call: absolute log2 fold change below 1; wrong sign: opposite sign to the design; P1 paired retained/final keys; P3 abundance terciles fixed once on the retained/added union from the median log2 final Precursor.Normalised over the twelve runs. | `mbraudit/pg250/posthoc_fc.py:analyse` (37) |
-| Figure 2 coordinates: y = class fold change, x = the P3 abundance divided by log2(10). | `mbraudit/figures/figure2.py:points` |
+| Figure 3 coordinates: y = class fold change, x = the P3 abundance divided by log2(10). | `mbraudit/figures/figure3.py:points` |
 
 ## Carryover or false matches (Supplement S9, post hoc)
 

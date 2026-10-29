@@ -1,9 +1,11 @@
-"""Assemble the main Tables 1 to 4 from the pipeline outputs.
+"""Assemble the main Tables 1 and 2, and the rows behind Figure 2 (Table D12), from the pipeline outputs.
 
 Nothing here estimates anything new: each cell is read from a pipeline output and, where the table prints a
 derived figure, derived with the carried function that defined it (scale_point, final_single_cell_bound,
 accepted_passes). Every function returns a list of row dictionaries with full-precision values; the entry
-scripts write them as TSV and as Markdown with the manuscript's rounding.
+scripts write them as TSV and as Markdown with the manuscript's rounding. wrong_organism() and
+human_only_passes() were Tables 3 and 4 of the earlier manuscript; they now feed Figure 2 (panels A and B) and
+Table D12 of Supplementary Data 1.
 """
 import csv
 from pathlib import Path
@@ -115,9 +117,11 @@ def table2(single_cell, candidate_counts):
     return rows, whole
 
 
-# ---------------------------------------------------------------- Table 3
+# ---------------------------------------------------------------- Figure 2A, Table D12 Block A (earlier Table 3)
 
-def table3(export):
+def wrong_organism(export):
+    """Wrong-organism identifications of the single-organism runs, all 54 runs analysed together (F1): A, P, n,
+    observed fraction A/n and two-way 95% interval per intended organism (and pooled) and class."""
     export = Path(export)
     counts = _read(export / 'endpoint_counts.tsv')
     intervals = _read(export / 'fraction_intervals.tsv')
@@ -133,9 +137,11 @@ def table3(export):
     return rows
 
 
-# ---------------------------------------------------------------- Table 4
+# ---------------------------------------------------------------- Figure 2B, Table D12 Block B (earlier Table 4)
 
-def table4(primary_export, within_human):
+def human_only_passes(primary_export, within_human):
+    """The six human-only runs analysed with the other 48 runs (all 54) and on their own (F1): A, n, percentage
+    wrong-organism and P for the first pass, the final result and each class; and the added-count comparison."""
     from mbraudit.pg250.summary import accepted_passes, added_count_comparison
     mixed = _rows(Path(primary_export) / 'endpoint_counts.tsv')
     alone = _rows(Path(within_human) / 'endpoint_counts.tsv')

@@ -131,121 +131,121 @@ S6|two-way interval, pools of 16	Supplement S6 (Table S6)	0.70 to 1.63	exact
 S6|two-way interval, pools of 6	Supplement S6 (Table S6)	0.40 to 1.50	exact
 P70|single-cell support ratio	P70	5.798	3
 P70|single-cell support counts	Supplement S3	105/17423 vs 22/21165	exact
-T3|Human|Retained|A	Table 3	79	exact
-T3|Human|Retained|P	Table 3	17523	exact
-T3|Human|Retained|n	Table 3	17602	exact
-T3|Human|Retained|fraction	Table 3	0.004488	sig4
-T3|Human|Retained|low95	Table 3	0.002575	sig4
-T3|Human|Retained|high95	Table 3	0.006851	sig4
-T3|Human|Added|A	Table 3	220	exact
-T3|Human|Added|P	Table 3	6488	exact
-T3|Human|Added|n	Table 3	6708	exact
-T3|Human|Added|fraction	Table 3	0.0328	sig4
-T3|Human|Added|low95	Table 3	0.02537	sig4
-T3|Human|Added|high95	Table 3	0.04179	sig4
-T3|Human|Lost|A	Table 3	22	exact
-T3|Human|Lost|P	Table 3	3465	exact
-T3|Human|Lost|n	Table 3	3487	exact
-T3|Human|Lost|fraction	Table 3	0.006309	sig4
-T3|Human|Lost|low95	Table 3	0.002449	sig4
-T3|Human|Lost|high95	Table 3	0.01157	sig4
-T3|Yeast|Retained|A	Table 3	1809	exact
-T3|Yeast|Retained|P	Table 3	13598	exact
-T3|Yeast|Retained|n	Table 3	15407	exact
-T3|Yeast|Retained|fraction	Table 3	0.1174	sig4
-T3|Yeast|Retained|low95	Table 3	0.07528	sig4
-T3|Yeast|Retained|high95	Table 3	0.1655	sig4
-T3|Yeast|Added|A	Table 3	1430	exact
-T3|Yeast|Added|P	Table 3	3490	exact
-T3|Yeast|Added|n	Table 3	4920	exact
-T3|Yeast|Added|fraction	Table 3	0.2907	sig4
-T3|Yeast|Added|low95	Table 3	0.2297	sig4
-T3|Yeast|Added|high95	Table 3	0.3493	sig4
-T3|Yeast|Lost|A	Table 3	181	exact
-T3|Yeast|Lost|P	Table 3	2334	exact
-T3|Yeast|Lost|n	Table 3	2515	exact
-T3|Yeast|Lost|fraction	Table 3	0.07197	sig4
-T3|Yeast|Lost|low95	Table 3	0.04069	sig4
-T3|Yeast|Lost|high95	Table 3	0.1204	sig4
-T3|E. coli|Retained|A	Table 3	1348	exact
-T3|E. coli|Retained|P	Table 3	16717	exact
-T3|E. coli|Retained|n	Table 3	18065	exact
-T3|E. coli|Retained|fraction	Table 3	0.07462	sig4
-T3|E. coli|Retained|low95	Table 3	0.06192	sig4
-T3|E. coli|Retained|high95	Table 3	0.09028	sig4
-T3|E. coli|Added|A	Table 3	1196	exact
-T3|E. coli|Added|P	Table 3	3662	exact
-T3|E. coli|Added|n	Table 3	4858	exact
-T3|E. coli|Added|fraction	Table 3	0.2462	sig4
-T3|E. coli|Added|low95	Table 3	0.2135	sig4
-T3|E. coli|Added|high95	Table 3	0.2878	sig4
-T3|E. coli|Lost|A	Table 3	106	exact
-T3|E. coli|Lost|P	Table 3	2340	exact
-T3|E. coli|Lost|n	Table 3	2446	exact
-T3|E. coli|Lost|fraction	Table 3	0.04334	sig4
-T3|E. coli|Lost|low95	Table 3	0.03019	sig4
-T3|E. coli|Lost|high95	Table 3	0.05961	sig4
-T3|Pooled|Retained|A	Table 3	3236	exact
-T3|Pooled|Retained|P	Table 3	47838	exact
-T3|Pooled|Retained|n	Table 3	51074	exact
-T3|Pooled|Retained|fraction	Table 3	0.06336	sig4
-T3|Pooled|Retained|low95	Table 3	0.04939	sig4
-T3|Pooled|Retained|high95	Table 3	0.07945	sig4
-T3|Pooled|Added|A	Table 3	2846	exact
-T3|Pooled|Added|P	Table 3	13640	exact
-T3|Pooled|Added|n	Table 3	16486	exact
-T3|Pooled|Added|fraction	Table 3	0.1726	sig4
-T3|Pooled|Added|low95	Table 3	0.1498	sig4
-T3|Pooled|Added|high95	Table 3	0.1965	sig4
-T3|Pooled|Lost|A	Table 3	309	exact
-T3|Pooled|Lost|P	Table 3	8139	exact
-T3|Pooled|Lost|n	Table 3	8448	exact
-T3|Pooled|Lost|fraction	Table 3	0.03658	sig4
-T3|Pooled|Lost|low95	Table 3	0.02565	sig4
-T3|Pooled|Lost|high95	Table 3	0.05118	sig4
+D12A|Human|Retained|A	Supplementary Data D12; P53	79	exact
+D12A|Human|Retained|P	Supplementary Data D12	17523	exact
+D12A|Human|Retained|n	Supplementary Data D12; P53	17602	exact
+D12A|Human|Retained|fraction	Supplementary Data D12; P53, P76	0.004488	sig4
+D12A|Human|Retained|low95	Supplementary Data D12	0.002575	sig4
+D12A|Human|Retained|high95	Supplementary Data D12	0.006851	sig4
+D12A|Human|Added|A	Supplementary Data D12; P22, P53, P56, P76	220	exact
+D12A|Human|Added|P	Supplementary Data D12	6488	exact
+D12A|Human|Added|n	Supplementary Data D12; P53, P56	6708	exact
+D12A|Human|Added|fraction	Supplementary Data D12; P22, P53, P67, P76	0.0328	sig4
+D12A|Human|Added|low95	Supplementary Data D12	0.02537	sig4
+D12A|Human|Added|high95	Supplementary Data D12	0.04179	sig4
+D12A|Human|Lost|A	Supplementary Data D12; P53	22	exact
+D12A|Human|Lost|P	Supplementary Data D12	3465	exact
+D12A|Human|Lost|n	Supplementary Data D12; P53	3487	exact
+D12A|Human|Lost|fraction	Supplementary Data D12; P53	0.006309	sig4
+D12A|Human|Lost|low95	Supplementary Data D12	0.002449	sig4
+D12A|Human|Lost|high95	Supplementary Data D12	0.01157	sig4
+D12A|Yeast|Retained|A	Supplementary Data D12	1809	exact
+D12A|Yeast|Retained|P	Supplementary Data D12	13598	exact
+D12A|Yeast|Retained|n	Supplementary Data D12	15407	exact
+D12A|Yeast|Retained|fraction	Supplementary Data D12	0.1174	sig4
+D12A|Yeast|Retained|low95	Supplementary Data D12	0.07528	sig4
+D12A|Yeast|Retained|high95	Supplementary Data D12	0.1655	sig4
+D12A|Yeast|Added|A	Supplementary Data D12	1430	exact
+D12A|Yeast|Added|P	Supplementary Data D12	3490	exact
+D12A|Yeast|Added|n	Supplementary Data D12	4920	exact
+D12A|Yeast|Added|fraction	Supplementary Data D12; P54	0.2907	sig4
+D12A|Yeast|Added|low95	Supplementary Data D12	0.2297	sig4
+D12A|Yeast|Added|high95	Supplementary Data D12	0.3493	sig4
+D12A|Yeast|Lost|A	Supplementary Data D12	181	exact
+D12A|Yeast|Lost|P	Supplementary Data D12	2334	exact
+D12A|Yeast|Lost|n	Supplementary Data D12	2515	exact
+D12A|Yeast|Lost|fraction	Supplementary Data D12	0.07197	sig4
+D12A|Yeast|Lost|low95	Supplementary Data D12	0.04069	sig4
+D12A|Yeast|Lost|high95	Supplementary Data D12	0.1204	sig4
+D12A|E. coli|Retained|A	Supplementary Data D12	1348	exact
+D12A|E. coli|Retained|P	Supplementary Data D12	16717	exact
+D12A|E. coli|Retained|n	Supplementary Data D12	18065	exact
+D12A|E. coli|Retained|fraction	Supplementary Data D12	0.07462	sig4
+D12A|E. coli|Retained|low95	Supplementary Data D12	0.06192	sig4
+D12A|E. coli|Retained|high95	Supplementary Data D12	0.09028	sig4
+D12A|E. coli|Added|A	Supplementary Data D12	1196	exact
+D12A|E. coli|Added|P	Supplementary Data D12	3662	exact
+D12A|E. coli|Added|n	Supplementary Data D12	4858	exact
+D12A|E. coli|Added|fraction	Supplementary Data D12; P54	0.2462	sig4
+D12A|E. coli|Added|low95	Supplementary Data D12	0.2135	sig4
+D12A|E. coli|Added|high95	Supplementary Data D12	0.2878	sig4
+D12A|E. coli|Lost|A	Supplementary Data D12	106	exact
+D12A|E. coli|Lost|P	Supplementary Data D12	2340	exact
+D12A|E. coli|Lost|n	Supplementary Data D12	2446	exact
+D12A|E. coli|Lost|fraction	Supplementary Data D12	0.04334	sig4
+D12A|E. coli|Lost|low95	Supplementary Data D12	0.03019	sig4
+D12A|E. coli|Lost|high95	Supplementary Data D12	0.05961	sig4
+D12A|Pooled|Retained|A	Supplementary Data D12	3236	exact
+D12A|Pooled|Retained|P	Supplementary Data D12	47838	exact
+D12A|Pooled|Retained|n	Supplementary Data D12	51074	exact
+D12A|Pooled|Retained|fraction	Supplementary Data D12	0.06336	sig4
+D12A|Pooled|Retained|low95	Supplementary Data D12	0.04939	sig4
+D12A|Pooled|Retained|high95	Supplementary Data D12	0.07945	sig4
+D12A|Pooled|Added|A	Supplementary Data D12	2846	exact
+D12A|Pooled|Added|P	Supplementary Data D12	13640	exact
+D12A|Pooled|Added|n	Supplementary Data D12	16486	exact
+D12A|Pooled|Added|fraction	Supplementary Data D12	0.1726	sig4
+D12A|Pooled|Added|low95	Supplementary Data D12	0.1498	sig4
+D12A|Pooled|Added|high95	Supplementary Data D12	0.1965	sig4
+D12A|Pooled|Lost|A	Supplementary Data D12	309	exact
+D12A|Pooled|Lost|P	Supplementary Data D12	8139	exact
+D12A|Pooled|Lost|n	Supplementary Data D12	8448	exact
+D12A|Pooled|Lost|fraction	Supplementary Data D12	0.03658	sig4
+D12A|Pooled|Lost|low95	Supplementary Data D12	0.02565	sig4
+D12A|Pooled|Lost|high95	Supplementary Data D12	0.05118	sig4
 P53|per-run added fraction min, %	P53	2.70	2
 P53|per-run added fraction max, %	P53	4.45	2
 P53|added above retained in every human-only run	P53	True	bool
-T4|First pass|with_A	Table 4	101	exact
-T4|First pass|with_n	Table 4	21,089	exact
-T4|First pass|with_percent	Table 4	0.479	3
-T4|First pass|alone_A	Table 4	108	exact
-T4|First pass|alone_n	Table 4	21,107	exact
-T4|First pass|alone_percent	Table 4	0.512	3
-T4|First pass|with_P	Table 4	20,988	exact
-T4|First pass|alone_P	Table 4	20,999	exact
-T4|Final result|with_A	Table 4	299	exact
-T4|Final result|with_n	Table 4	24,310	exact
-T4|Final result|with_percent	Table 4	1.230	3
-T4|Final result|alone_A	Table 4	118	exact
-T4|Final result|alone_n	Table 4	25,681	exact
-T4|Final result|alone_percent	Table 4	0.459	3
-T4|Final result|with_P	Table 4	24,011	exact
-T4|Final result|alone_P	Table 4	25,563	exact
-T4|Retained|with_A	Table 4	79	exact
-T4|Retained|with_n	Table 4	17,602	exact
-T4|Retained|with_percent	Table 4	0.449	3
-T4|Retained|alone_A	Table 4	79	exact
-T4|Retained|alone_n	Table 4	17,981	exact
-T4|Retained|alone_percent	Table 4	0.439	3
-T4|Retained|with_P	Table 4	17,523	exact
-T4|Retained|alone_P	Table 4	17,902	exact
-T4|Added|with_A	Table 4	220	exact
-T4|Added|with_n	Table 4	6,708	exact
-T4|Added|with_percent	Table 4	3.280	3
-T4|Added|alone_A	Table 4	39	exact
-T4|Added|alone_n	Table 4	7,700	exact
-T4|Added|alone_percent	Table 4	0.506	3
-T4|Added|with_P	Table 4	6,488	exact
-T4|Added|alone_P	Table 4	7,661	exact
-T4|Lost|with_A	Table 4	22	exact
-T4|Lost|with_n	Table 4	3,487	exact
-T4|Lost|with_percent	Table 4	0.631	3
-T4|Lost|alone_A	Table 4	29	exact
-T4|Lost|alone_n	Table 4	3,126	exact
-T4|Lost|alone_percent	Table 4	0.928	3
-T4|Lost|with_P	Table 4	3,465	exact
-T4|Lost|alone_P	Table 4	3,097	exact
+D12B|First pass|with_A	Supplementary Data D12	101	exact
+D12B|First pass|with_n	Supplementary Data D12	21,089	exact
+D12B|First pass|with_percent	Supplementary Data D12; P57	0.479	3
+D12B|First pass|alone_A	Supplementary Data D12	108	exact
+D12B|First pass|alone_n	Supplementary Data D12	21,107	exact
+D12B|First pass|alone_percent	Supplementary Data D12; P57	0.512	3
+D12B|First pass|with_P	Supplementary Data D12	20,988	exact
+D12B|First pass|alone_P	Supplementary Data D12	20,999	exact
+D12B|Final result|with_A	Supplementary Data D12; P53	299	exact
+D12B|Final result|with_n	Supplementary Data D12; P53	24,310	exact
+D12B|Final result|with_percent	Supplementary Data D12; P53, P56, P57	1.230	3
+D12B|Final result|alone_A	Supplementary Data D12	118	exact
+D12B|Final result|alone_n	Supplementary Data D12	25,681	exact
+D12B|Final result|alone_percent	Supplementary Data D12; P57	0.459	3
+D12B|Final result|with_P	Supplementary Data D12; P57	24,011	exact
+D12B|Final result|alone_P	Supplementary Data D12; P57	25,563	exact
+D12B|Retained|with_A	Supplementary Data D12	79	exact
+D12B|Retained|with_n	Supplementary Data D12	17,602	exact
+D12B|Retained|with_percent	Supplementary Data D12	0.449	3
+D12B|Retained|alone_A	Supplementary Data D12	79	exact
+D12B|Retained|alone_n	Supplementary Data D12	17,981	exact
+D12B|Retained|alone_percent	Supplementary Data D12	0.439	3
+D12B|Retained|with_P	Supplementary Data D12	17,523	exact
+D12B|Retained|alone_P	Supplementary Data D12	17,902	exact
+D12B|Added|with_A	Supplementary Data D12; P22, P56, P76	220	exact
+D12B|Added|with_n	Supplementary Data D12; P56	6,708	exact
+D12B|Added|with_percent	Supplementary Data D12	3.280	3
+D12B|Added|alone_A	Supplementary Data D12; P22, P56, P76	39	exact
+D12B|Added|alone_n	Supplementary Data D12; P56	7,700	exact
+D12B|Added|alone_percent	Supplementary Data D12	0.506	3
+D12B|Added|with_P	Supplementary Data D12	6,488	exact
+D12B|Added|alone_P	Supplementary Data D12	7,661	exact
+D12B|Lost|with_A	Supplementary Data D12	22	exact
+D12B|Lost|with_n	Supplementary Data D12	3,487	exact
+D12B|Lost|with_percent	Supplementary Data D12	0.631	3
+D12B|Lost|alone_A	Supplementary Data D12	29	exact
+D12B|Lost|alone_n	Supplementary Data D12	3,126	exact
+D12B|Lost|alone_percent	Supplementary Data D12	0.928	3
+D12B|Lost|with_P	Supplementary Data D12	3,465	exact
+D12B|Lost|alone_P	Supplementary Data D12	3,097	exact
 P56|fewer wrong-organism additions alone, %	P56	82	0
 P54|first-pass wrong-organism fraction Y, %	P54 (about 11%)	11	0
 P54|first-pass wrong-organism fraction E, %	P54 (about 7%)	7	0
@@ -285,12 +285,12 @@ P62|Y|P1 MAE change	P62 (lowered by 0.0620)	-0.0620	4
 P62|E|P1 MAE change	P62 (lowered by 0.0563)	-0.0563	4
 P62|jan16|added MAE smaller on R/T intersection (of 2)	P62 (three of four, with jan09)	2	exact
 P62|jan09|added MAE smaller on R/T intersection (of 2)	P62 (three of four, with jan16)	1	exact
-Fig2|Y|R|ions	Figure 2 caption	709	exact
-Fig2|Y|T|ions	Figure 2 caption	417	exact
-Fig2|E|R|ions	Figure 2 caption	1,046	exact
-Fig2|E|T|ions	Figure 2 caption	603	exact
-Fig2|Y|ions in both panels	Figure 2 caption (some ions in both panels)	14	exact
-Fig2|E|ions in both panels	Figure 2 caption (some ions in both panels)	42	exact
+Fig3|Y|R|ions	Figure 3 caption	709	exact
+Fig3|Y|T|ions	Figure 3 caption	417	exact
+Fig3|E|R|ions	Figure 3 caption	1,046	exact
+Fig3|E|T|ions	Figure 3 caption	603	exact
+Fig3|Y|ions in both panels	Figure 3 caption (some ions in both panels)	14	exact
+Fig3|E|ions in both panels	Figure 3 caption (some ions in both panels)	42	exact
 S10|first|49|identified precursors	Supplement S9, Table S10	127	exact
 S10|first|50|identified precursors	Supplement S9, Table S10	0	exact
 S10|first|51|identified precursors	Supplement S9, Table S10	51	exact
@@ -307,10 +307,10 @@ P40|designed runs	P40	54	exact
 P40|runs of kind mixture	P40	30	exact
 P40|runs of kind single	P40	18	exact
 P40|runs of kind blank	P40	6	exact
-S9|check|added wrong-organism	Supplement S9 (reproduces Table 3)	220	exact
-S9|check|added species-exclusive	Supplement S9 (reproduces Table 3)	6,708	exact
-S9|check|retained wrong-organism	Supplement S9 (reproduces Table 3)	79	exact
-S9|check|retained species-exclusive	Supplement S9 (reproduces Table 3)	17,602	exact
+S9|check|added wrong-organism	Supplement S9 (reproduces Table D12)	220	exact
+S9|check|added species-exclusive	Supplement S9 (reproduces Table D12)	6,708	exact
+S9|check|retained wrong-organism	Supplement S9 (reproduces Table D12)	79	exact
+S9|check|retained species-exclusive	Supplement S9 (reproduces Table D12)	17,602	exact
 S9|run order|12743|Y|added yeast	Supplement S9 (carryover, post hoc)	11	exact
 S9|run order|12743|E|added E. coli	Supplement S9 (carryover, post hoc)	17	exact
 S9|run order|12743|added species-exclusive	Supplement S9 (carryover, post hoc)	1,032	exact

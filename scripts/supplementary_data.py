@@ -1,5 +1,6 @@
-"""Supplementary Data 1, the published workbook: a README sheet and tables D1 to D11 (one sheet each, with blocks)
+"""Supplementary Data 1, the published workbook: a README sheet and tables D1 to D12 (one sheet each, with blocks)
 from the pipeline outputs, each value written with the digits of the published tables (mbraudit.workbook.publish).
+D12 is the source data of main-text Figure 2 (Tables 3 and 4 of the earlier manuscript).
 The v5.1 tables behind the short Supplement tables S3, S5, S6 and S10 are written at full precision to a separate
 check workbook.
 

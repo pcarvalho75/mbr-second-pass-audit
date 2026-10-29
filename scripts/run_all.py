@@ -7,12 +7,13 @@ Steps (about 50 minutes on a desktop; the 54-run fold-change step alone takes ab
  2. step_compare_configurations.py                          side-by-side tables, empirical-library ratios
  3. step_pools.py                                           pools of one or four cell lines (Table S6, D6)
  4. step_predicted_census.py                                r of the restricted library (D1; optional, slow)
- 5. step_pg250.py --study primary, replication              Tables 3, S7, S8, S11, D7, D8, D10; Figure 2
- 6. step_within_organism.py --organism H, Y, E              Table 4, Table S9, D9
+ 5. step_pg250.py --study primary, replication              Tables S7, S8, S11, D7, D8, D10; Figures 2A, 3
+ 6. step_within_organism.py --organism H, Y, E              Figure 2B, Table S9, D9
  7. step_posthoc_fc.py                                      P1 to P3 (Table S11, D11)
  8. step_native_qa.py                                       blank runs (Table S10)
  9. step_carryover.py                                       carryover or false matches (post hoc; Supplement S9)
-10. main_tables.py, figure1.py, figure2.py, figures_supplementary.py, supplementary_data.py, verify.py
+10. main_tables.py, figure1.py, figure2.py, figure3.py, figures_supplementary.py, supplementary_data.py (D1 to D12),
+    verify.py
 Each step refuses to overwrite a non-empty output folder of the 250 pg steps; delete outputs to rerun.
 """
 import subprocess
@@ -36,7 +37,8 @@ def main():
         steps.append(['step_predicted_census.py'])
     steps += [['step_pg250.py', '--study', 'primary'], ['step_pg250.py', '--study', 'replication']]
     steps += [['step_within_organism.py', '--organism', o] for o in ['H', 'Y', 'E']]
-    steps += [['step_posthoc_fc.py'], ['step_native_qa.py'], ['step_carryover.py'], ['main_tables.py'], ['figure1.py'], ['figure2.py'], ['figures_supplementary.py']]
+    steps += [['step_posthoc_fc.py'], ['step_native_qa.py'], ['step_carryover.py'], ['main_tables.py'], ['figure1.py'], ['figure2.py'], ['figure3.py'],
+              ['figures_supplementary.py']]
     steps.append(['supplementary_data.py'] + (['--compare', str(args.compare.resolve())] if args.compare else []))
     steps.append(['verify.py'])
     for step in steps:

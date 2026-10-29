@@ -1,5 +1,6 @@
-"""Supplementary Data 1 (tables D1 to D11) from the pipeline outputs, plus the v5.1 tables behind the short
-Supplement tables S3, S5, S6 and S10.
+"""Supplementary Data 1 (tables D1 to D12) from the pipeline outputs, plus the v5.1 tables behind the short
+Supplement tables S3, S5, S6 and S10. D12 holds the source data of main-text Figure 2 (Tables 3 and 4 of the earlier
+manuscript, m3 and m4).
 
 Each function returns one sheet as a list of blocks (title, DataFrame). Values are kept at full precision (the
 long tables D2 to D5 as the exact text of the output tables). publish() writes the published workbook: a README
@@ -477,11 +478,33 @@ def s64(s):
     return [('', pd.DataFrame(rows))]
 
 
-# Sheets of the published workbook (D1 to D11, numbered in the order the Supplement first cites them), each the v5.1
-# tables it holds, in block order, and the number of leading label columns that identify a row in each block.
+def m3(s):
+    """Table 3 of the earlier manuscript, now the source data of Figure 2A (D12 Block A): all 54 runs, F1."""
+    from mbraudit.tables import wrong_organism
+    rows = [{'Intended organism': r['organism'], 'Class': r['class'], 'A': r['A'], 'P': r['P'], 'n': r['n'],
+             'Observed wrong-organism fraction [two-way 95% interval]': _br(r['fraction'], r['low95'], r['high95'])}
+            for r in wrong_organism(s.pg / 'primary' / 'export')]
+    return [('', pd.DataFrame(rows))]
+
+
+def m4(s):
+    """Table 4 of the earlier manuscript, now the source data of Figure 2B (D12 Block B): the human-only runs
+    analysed with all 54 runs and alone, F1."""
+    from mbraudit.tables import human_only_passes
+    passes, _ = human_only_passes(s.pg / 'primary' / 'export', s.pg / 'within-H')
+    rows = [{'Class': r['class'], 'With all 54 runs: A/n': f"{r['with_A']:,}/{r['with_n']:,}", 'With all 54 runs: %': r['with_percent'],
+             'Human-only runs alone: A/n': f"{r['alone_A']:,}/{r['alone_n']:,}", 'Human-only runs alone: %': r['alone_percent'],
+             'Human identifications (P): with / alone': f"{r['with_P']:,} / {r['alone_P']:,}"} for r in passes]
+    return [('', pd.DataFrame(rows))]
+
+
+# Sheets of the published workbook (D1 to D11, numbered in the order the Supplement first cites them, then D12, the
+# source data of main-text Figure 2), each the tables it holds, in block order, and the number of leading label
+# columns that identify a row in each block.
 SHEETS = {'D1': [('s9a', 2), ('s49', 1)], 'D2': [('s61', 2)], 'D3': [('s64', 3)], 'D4': [('s62', 3), ('s63', 3)],
           'D5': [('s65', 3)], 'D6': [('s1b', 1), ('s4', 3)], 'D7': [('s51', 2)], 'D8': [('s73', 2)],
-          'D9': [('s60', 3)], 'D10': [('s58', [2, 3]), ('s53', 2), ('s54', 3)], 'D11': [('s59', 6)]}
+          'D9': [('s60', 3)], 'D10': [('s58', [2, 3]), ('s53', 2), ('s54', 3)], 'D11': [('s59', 6)],
+          'D12': [('m3', 2), ('m4', 1)]}
 # v5.1 tables cited by the short Supplement but not held in the workbook; written to a separate check workbook.
 EXTRA = {'Table S3 (v5.1 S72)': [('s72', 1)], 'Table S5 (v5.1 S71)': [('s71', 2)], 'Table S6 (v5.1 S2)': [('s2', 2)],
          'Table S10 (v5.1 S56)': [('s56', 2)]}
@@ -514,9 +537,9 @@ REPOSITORY = 'https://github.com/pcarvalho75/mbr-second-pass-audit'
 README_TITLE = ('Supplementary Data 1. Full-detail tables behind the Supplementary Information of "Completeness at a cost: '
                 'auditing the second pass of match-between-runs in single-cell DIA proteomics".')
 README_NOTES = [
-    'Each sheet holds one table, named by its table ID (D1 to D11); a merged table holds labelled blocks. Values are recomputed '
+    'Each sheet holds one table, named by its table ID (D1 to D12); a merged table holds labelled blocks. Values are recomputed '
     'from the search outputs by the analysis code (scripts/supplementary_data.py) and written with the digits printed in the '
-    'v5.1 Supplement tables and their machine-readable versions.',
+    'v5.1 Supplement tables and their machine-readable versions (D12: those of Tables 3 and 4 of the earlier manuscript).',
     'Plain numbers are numeric cells whose number format reproduces the printed digits; numbers with more than 15 significant '
     'digits, intervals, count pairs and labels are stored as text so that every digit is kept.',
     'Vocabulary of the older labels: second-pass-only = added; first-pass-only = lost; validation = the 250 pg dataset '
@@ -609,6 +632,16 @@ PUBLICATION = {
             [None, 'Continued: P2 primary results. D denotes first pass, F final, R retained and T second-pass-only; a dash '
              'marks an inapplicable count.', 'Continued: P3 primary results.',
              'Continued: Sensitivity results, by endpoint, batch, filter (F1, F2, F3), quantity and species.']),
+    'D12': ('Source data of Figure 2 (250 pg dataset, F1)', 'main-text Tables 3 and 4', 'S7, S8; main-text Figure 2',
+            'Block A: identifications exclusive to an absent (A) and to the intended (P) organism, n and the observed '
+            'wrong-organism fraction with its two-way 95% interval, by intended organism and class, all 54 runs analysed '
+            'together (Figure 2A). Block B: the six human-only runs analysed with all 54 runs and alone, A/n and percentage '
+            'for the first pass, the final result and each class, and the human identifications P of both analyses (Figure 2B).',
+            'Blocks A and B were Tables 3 and 4 of the earlier manuscript and keep their printed digits. n = A + P, excluding '
+            'shared and ambiguous assignments; pooled rows sum over the three organisms; intervals are two-way percentile '
+            'intervals. The first pass is retained plus lost observations, and the final result retained plus added.',
+            ['Block A. All 54 runs analysed together (Figure 2A; earlier Table 3)',
+             'Block B. Human-only runs analysed with all 54 runs and alone, post hoc (Figure 2B; earlier Table 4)']),
 }
 # Display digits of the published tables, by sheet and column (every number inside the cell text is written so).
 # g4: four significant digits; fN: N decimal places; thousands: integer with thousands separators; percent_or_f4:
@@ -623,6 +656,7 @@ FORMATS = {
     'D10': {c: 'g4' for c in ['Jan 16 median', 'Jan 16 bias', 'Jan 16 MAE', 'Jan 9 median', 'Jan 9 bias', 'Jan 9 MAE',
                               'Median log2 fold change', 'Median bias', 'MAE', 'Expected', 'Observed median', 'RMSE']},
     'D11': {'Point': 'percent_or_f4', '95% interval': 'percent_or_f4'},
+    'D12': {'Observed wrong-organism fraction [two-way 95% interval]': 'g4', 'With all 54 runs: %': 'f3', 'Human-only runs alone: %': 'f3'},
 }
 NUMBER_TOKEN = re.compile(r'-?\d+(?:\.\d+)?(?:e[-+]?\d+)?')
 
@@ -690,7 +724,7 @@ def shown(value, fmt):
 
 
 def publish(sheets, path):
-    """Write the published workbook (README and D1 to D11) and check that every cell displays its text. A sheet whose
+    """Write the published workbook (README and D1 to D12) and check that every cell displays its text. A sheet whose
     step outputs are missing is written with the reason only (as on synthetic data)."""
     from openpyxl import Workbook, load_workbook
     from openpyxl.styles import Alignment, Font, PatternFill
