@@ -546,9 +546,9 @@ README_NOTES = [
     '(PXD056832) with all 54 runs analysed together; recipient = a cell, or a run of the 250 pg dataset; on = original search '
     '(refinement on); off or no_refine = refinement off; standard or standard_library = the standard-library search; H, Y, E = '
     'human, yeast, E. coli; D, F, R, T, L = first pass, final, retained, added, lost.',
-    f'Analysis code: {REPOSITORY}. Search outputs, libraries, aggregate tables and verification records: [ZENODO DOI].',
+    f'Analysis code: {REPOSITORY}. Search outputs, libraries, aggregate tables and verification records: available from the corresponding author on request.',
     'The other tables of the earlier Supplement (mass accuracy, checksums, support strata, seed checks and summary tables) are '
-    f'in the archive at [ZENODO DOI], and the scripts at {REPOSITORY} regenerate them.',
+    f'available on request, and the scripts at {REPOSITORY} regenerate them.',
 ]
 CONFNOTE = ('Columns: original = original search (refinement on); no_refine = refinement off; standard_library = '
             'standard-library search. ')

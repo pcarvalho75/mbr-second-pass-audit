@@ -4,7 +4,6 @@ title: "Completeness at a cost: auditing the second pass of match-between-runs i
 type: software
 license: MIT
 version: "6.0"
-# doi: add the Zenodo DOI of this release when it is minted
 authors:
   - family-names: Martins
     given-names: Aline M. A.

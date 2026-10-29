@@ -3,8 +3,8 @@
 ## How to reproduce
 
 1. Install Python 3.12 and the packages of `requirements.txt`.
-2. Download the processed-data archive (Zenodo, DOI to be added) and copy `config.template.yaml` to
-   `config.local.yaml`. Set each path to the archived file (docs/DATA.md lists them with their SHA256 prefixes).
+2. Obtain the processed inputs (available from the corresponding author on request) and copy `config.template.yaml` to
+   `config.local.yaml`. Set each path to the input file (docs/DATA.md lists them with their SHA256 prefixes).
    The configuration file is the only place where local paths appear; it is ignored by git.
 3. Run `python scripts/run_all.py`. It runs every step in its own process (about 50 minutes on a desktop with 32 GB of
    memory; the 54-run fold-change step alone takes about 25 minutes, the restricted-library census about 10 minutes;
@@ -27,7 +27,7 @@ the post hoc and within-organism analyses, and a synthetic end-to-end run of eve
 
 ## Verification result
 
-Run on the archived inputs on 28 October 2026 (Windows 11, Python 3.12.10, the versions of `requirements.txt`):
+Run on the processed inputs on 28 October 2026 (Windows 11, Python 3.12.10, the versions of `requirements.txt`):
 
 | Check | Result |
 | --- | --- |
@@ -45,7 +45,7 @@ Run on the archived inputs on 28 October 2026 (Windows 11, Python 3.12.10, the v
   the search reports. The cohort itself is fixed in `mbraudit/singlecell/design.py`.
 - **The candidate ratio of the standard predicted library** (r = 0.2718) and **the species map of the three-organism
   library** are read from the saved output of the library audit (`references/candidate-counts.tsv`; the species map
-  in the archive). Regenerating them uses `mbraudit.library.opportunity_audit.audit`, which needs the optional
+  is one of the processed inputs). Regenerating them uses `mbraudit.library.opportunity_audit.audit`, which needs the optional
   pyahocorasick package. The ratio of the original library (r = 0.2741) is recomputed by
   `scripts/step_predicted_census.py` and matches.
 

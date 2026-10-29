@@ -1,7 +1,7 @@
 # Completeness at a cost: auditing the second pass of match-between-runs in single-cell DIA proteomics
 
 Analysis code for the article of the same title (Briefings in Bioinformatics, Case study; Martins, Fischer, dos Santos,
-Sales, Luz, Muotri and Carvalho). It recomputes every table, figure and number of the article from the DIA-NN reports and the archived inputs.
+Sales, Luz, Muotri and Carvalho). It recomputes every table, figure and number of the article from the DIA-NN reports and the other processed inputs.
 
 ## The question
 
@@ -61,8 +61,8 @@ python -m pip install -r requirements.txt
 python -m unittest discover -s tests          # unit tests and a small synthetic end-to-end run (about 2 minutes)
 ```
 
-To reproduce the article from the archived inputs (Zenodo, DOI to be added), copy `config.template.yaml` to
-`config.local.yaml`, set the paths to the archived inputs ([docs/DATA.md](docs/DATA.md)), then run
+To reproduce the article from the processed inputs (search outputs and libraries, available from the corresponding author on request), copy
+`config.template.yaml` to `config.local.yaml`, set the paths to the inputs ([docs/DATA.md](docs/DATA.md)), then run
 
 ```
 python scripts/run_all.py        # about 50 minutes; outputs go to the configured output_dir

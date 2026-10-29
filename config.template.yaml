@@ -1,6 +1,6 @@
 # Copy this file to config.local.yaml (ignored by git) and point each entry at your copy of the inputs.
 # Relative paths resolve from the folder that holds the configuration file. Inputs are only read, never written.
-# The processed-data archive (Zenodo, DOI to be added) holds every file named below; docs/DATA.md lists them.
+# The processed inputs named below are available from the corresponding author on request; docs/DATA.md lists them.
 
 output_dir: outputs
 

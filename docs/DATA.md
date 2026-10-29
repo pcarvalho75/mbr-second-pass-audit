@@ -16,7 +16,7 @@ runs and six blanks. The 9 January 2025 mixture batch (`design/samples54-replica
 
 Every search used DIA-NN 2.5.1 with match-between-runs (`--reanalyse`, empirical-library output), a run precursor
 q-value of 0.01 and `--matrices`. Command lines as recorded, with input lists and local paths replaced by braces
-(the full records are in the archive and in Supplement S1.4, Table S2):
+(full records in Supplement S1.4, Table S2, and on request):
 
 Single cells, original configuration (refinement on, DIA-NN default):
 
@@ -53,10 +53,10 @@ arguments with the 9 January mixtures, the same 18 single-organism runs and the 
 | Three-organism predicted library | 250 pg searches | As the standard library, with human, yeast and E. coli sequences; 6,468,920 precursors | SHA256 8ea00c66e446a505987778382b090593013326f87e9ca88abdfd2d86d12ea38e |
 | Empirical libraries | Second pass of each search | Built by DIA-NN from each search's first pass (report-lib.parquet), default inclusion rule | Per search, listed below |
 
-## Processed inputs read by this code (Zenodo archive, DOI to be added)
+## Processed inputs read by this code (available on request)
 
-The archive [ZENODO DOI] holds the reports and libraries of every search above, the predicted libraries, the FASTA
-files, the species map and verification records. The files this repository reads, with the SHA256 prefixes of the
+The reports and libraries of every search above, the predicted libraries, the FASTA files, the species map and the
+verification records are available from the corresponding author on request. The files this repository reads, with the SHA256 prefixes of the
 copies used to reproduce the article:
 
 | Configuration key | File | SHA256 (first 16) |
